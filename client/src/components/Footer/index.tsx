@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
             &larr; Go Back
           </button>
         )}
-        <h4>
+        <h4 >
           Made with{' '}
           <span
             className="emoji"

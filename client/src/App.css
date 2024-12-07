@@ -360,7 +360,7 @@ body {
     Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol';
   font-size: 16px;
-  color: #1a1a1a;
+  color: #ffffff;
 }
 
 h1,
@@ -372,7 +372,7 @@ h6 {
   font-family: 'JetBrains Mono', monospace;
   margin: 0 0 0.5rem;
   line-height: 1.25;
-  color: grey
+  color: rgb(230, 221, 221)
 }
 
 h1 {
@@ -921,7 +921,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #2d3e50 !important;
+  background-color: #000000 !important;
 }
 
 .bg-info {
@@ -1707,3 +1707,181 @@ label form [type='radio'] {
     align-content: center;
   }
 }
+
+
+body {
+  font-family: 'DM Sans', sans-serif; /* Modern font inspired by Mosvita */
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: #fff;
+}
+
+.homepage-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(120deg, #191a16, #6c00ff);
+  padding: 80px 20px;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  background-color: #fff;
+  color: #111;
+  padding: 15px 30px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #ddd;
+}
+
+/* Featured Event */
+.featured-event {
+  margin-bottom: 50px;
+}
+
+.featured-event h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.event-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.event-image-wrapper {
+  flex: 1;
+}
+
+.event-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.event-details {
+  flex: 1;
+}
+
+.event-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.buy-ticket-button {
+  background-color: #ff007c;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.buy-ticket-button:hover {
+  background-color: #e60072;
+}
+
+/* Upcoming Events */
+.upcoming-events h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.events-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.event-card {
+  background-color: #040404;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  text-align: center;
+  border: 10px;
+  border-color: #222121;
+}
+
+.event-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.event-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.details-button {
+  background-color: #6c00ff;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.details-button:hover {
+  background-color: #431588;
+}
+
+.slogan {
+  font-family: "Sixtyfour Convergence", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "BLED" 0,
+    "SCAN" 0,
+    "XELA" 0,
+    "YELA" 0;
+}
+
+.logo {
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+  }
+  

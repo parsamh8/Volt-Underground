@@ -1,10 +1,17 @@
 import "./NavTabs.css";
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
+import Auth from "../../utils/auth";
 
 function NavTabs() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false); // Explicitly type useState
   const menuRef = useRef<HTMLDivElement | null>(null); // Ref type for a div element
+
+  const logout = (event: any) => {
+    event.preventDefault();
+    // Logs the user out by calling the logout method from Auth
+    Auth.logout();
+  };
 
   // Toggles the side navbar
   const toggleMenu = () => {
@@ -64,18 +71,32 @@ function NavTabs() {
           <NavLink className="nav-item" to="/">
             <li className="nav-link">Home</li>
           </NavLink>
-          <NavLink className="nav-item" to="/login">
-            <li className="nav-link">Login</li>
-          </NavLink>
-          <NavLink className="nav-item" to="/signup">
-            <li className="nav-link">Sign Up</li>
-          </NavLink>
-          <NavLink className="nav-item" to="/me">
-            <li className="nav-link">Profile</li>
-          </NavLink>
-          <NavLink className="nav-item" to="/profiles/:username">
-            <li className="nav-link">Checkout</li>
-          </NavLink>
+
+          {Auth.loggedIn() ? (
+            <>
+              <NavLink className="nav-item" to="/me">
+                {/* Retrieving the logged-in user's profile to display the username */}
+                <div className="nav-link">View Profile</div>
+              </NavLink>
+              <NavLink className="nav-item" to="/profiles/:username">
+                <li className="nav-link">Checkout</li>
+              </NavLink>
+              <div className="nav-item">
+                <button className="nav-link" onClick={logout}>
+                  Logout
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <NavLink className="nav-item" to="/signup">
+                <li className="nav-link">Sign Up</li>
+              </NavLink>
+              <NavLink className="nav-item" to="/login">
+                <li className="nav-link">Login</li>
+              </NavLink>
+            </>
+          )}
         </ul>
       </div>
     </nav>

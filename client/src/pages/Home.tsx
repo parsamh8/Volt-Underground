@@ -29,6 +29,74 @@ const Home = () => {
           )}
         </div>
       </div>
+      <div className="homepage-container">
+      {/* Hero Section */}
+      <div className="hero-section">
+        <div className="hero-content">
+          <h1>Boiler Room Video</h1>
+          <p>Where beats meet the night. Discover the ultimate techno-house experience.</p>
+          <button className="cta-button">Explore Events</button>
+        </div>
+      </div>
+
+      {/* Featured Event Section */}
+      <section className="featured-event">
+        <h2>Featured Event</h2>
+        <div className="event-container">
+          <div className="event-image-wrapper">
+            <img
+              src="https://via.placeholder.com/600x400"
+              alt="Featured Event"
+              className="event-image"
+            />
+          </div>
+          <div className="event-details">
+            <h3>Techno Night: Underground Beats</h3>
+            <p>Date: Dec 15, 2024</p>
+            <p>Location: Vault Club, Downtown</p>
+            <button className="buy-ticket-button">Buy Tickets</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Events Section */}
+      <section className="upcoming-events">
+        <h2>Upcoming Events</h2>
+        <div className="events-grid">
+          {[...Array(3)].map((_, index) => (
+            <div key={index} className="event-card">
+              <img
+                src="https://via.placeholder.com/300x200"
+                alt={`Event ${index + 1}`}
+                className="event-image"
+              />
+              <h3>Event {index + 1}</h3>
+              <p>Date: TBD</p>
+              <button className="details-button">Details</button>
+            </div>
+          ))}
+        </div>
+      </section>
+      {/* Past Events Section */}
+      <section className="upcoming-events top-margin">
+        <h2>Past Events</h2>
+        <div className="events-grid">
+          {[...Array(3)].map((_, index) => (
+            <div key={index} className="event-card">
+              <img
+                src="https://via.placeholder.com/300x200"
+                alt={`Event ${index + 1}`}
+                className="event-image"
+              />
+              <h3>Event {index + 1}</h3>
+              <p>Date: TBD</p>
+              <button className="details-button">Details</button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </div>
     </main>
   );
 };

@@ -27,8 +27,13 @@
 .navbar-toggler {
   top: 0px;
   left: 0vw;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   transition: transform 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar-toggler:hover {
@@ -39,6 +44,11 @@
 .navbar-toggler-icon {
   color: white;
   transition: transform 0.5s ease;
+}
+
+.navbar-button-icon {
+  width: 40px;
+  height: 40px;
 }
 
 .close-button {
@@ -107,10 +117,7 @@ a:-webkit-any-link {
   font-weight: bold;
 }
 
-.nav-bar-button-icon {
-  width: 40px;
-  height: 40px;
-}
+
 
 .bg-light-nav {
   --bs-bg-opacity: 1;

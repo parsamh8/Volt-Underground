@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/Error';
+import Session from './pages/Session/Session.js';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,9 @@ const router = createBrowserRouter([
       }, {
         path: '/thoughts/:thoughtId',
         element: <SingleThought />
+      },{
+        path: '/session',
+        element: <Session />
       }
     ]
   },

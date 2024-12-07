@@ -39,7 +39,7 @@ const Session = ({ posterUrl, title, description, venue, date, time, ticketLink 
         <p><strong>Date:</strong> {date}</p>
         <p><strong>Time:</strong> {time}</p>
         <div className='session-img'>
-          <img src={'./src/assets/logo-light.png'}/>
+          <img src={'/src/assets/logo-light.png'}/>
         </div>
         <button className="session-ticket-button" onClick={() => window.open(ticketLink, '_blank')}>
           Buy Ticket

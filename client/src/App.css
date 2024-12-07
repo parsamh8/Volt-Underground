@@ -943,6 +943,11 @@ a:hover {
   background-color: #ffffff !important;
 }
 
+.bg-light {
+  --bs-bg-opacity: 1;
+  background-color: rgb(63, 98, 131) !important;
+}
+
 .bg-black {
   background-color: #000000 !important;
 }
@@ -1169,7 +1174,7 @@ label form [type='radio'] {
 
 .container {
   width: 85%;
-  max-width: 1200px;
+  max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
 }

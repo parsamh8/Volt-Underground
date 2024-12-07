@@ -46,7 +46,7 @@ function NavTabs() {
             onClick={toggleMenu} // Attach toggle menu to navbar toggler button
           >
             <img
-              className="nav-bar-button-icon"
+              className="navbar-button-icon"
               src="https://img.icons8.com/?size=100&id=120374&format=png&color=FFFFFF"
               alt="Toggle Menu"
             />

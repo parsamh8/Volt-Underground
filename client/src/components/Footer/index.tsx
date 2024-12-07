@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const location = useLocation();
@@ -23,18 +23,9 @@ const Footer: React.FC = () => {
             &larr; Go Back
           </button>
         )}
-        <h4 >
-          Made with{' '}
-          <span
-            className="emoji"
-            role="img"
-            aria-label="heart"
-            aria-hidden="false"
-          >
-            ❤️
-          </span>{' '}
-          by the Tech Thoughts team.
-        </h4>
+        <h6 className='top-margin'>
+        &copy; 2024 <Link className="text-light" to="/"><span className='logo'>Volt Underground</span></Link>. All rights reserved.
+        </h6>
       </div>
     </footer>
   );

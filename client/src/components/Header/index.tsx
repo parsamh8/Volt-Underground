@@ -13,10 +13,10 @@ const Header = () => {
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div>
           <Link className="text-light" to="/">
-            <h1 className="m-0 logo">Volt Underground</h1>
+            <img className='logo-header' src="/src/assets/logo-dark.png" alt="Description of the image"/>
           </Link>
-          <p className="m-0 slogan">More Than Underground, It's a Movement.</p>
-        </div>
+          {/* <p className="m-0 slogan blinking-text">More Than Underground, It's a Movement.</p> */}
+          </div>
         <div>
           {/* Checking if the user is logged in to conditionally render profile link and logout button */}
           {Auth.loggedIn() ? (

@@ -33,7 +33,7 @@ const Home = () => {
       {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
-          <h1>Volt Underground</h1>
+          <h1>Boiler Room Video</h1>
           <p>Where beats meet the night. Discover the ultimate techno-house experience.</p>
           <button className="cta-button">Explore Events</button>
         </div>
@@ -77,8 +77,8 @@ const Home = () => {
           ))}
         </div>
       </section>
-
-      <section className="upcoming-events">
+      {/* Past Events Section */}
+      <section className="upcoming-events top-margin">
         <h2>Past Events</h2>
         <div className="events-grid">
           {[...Array(3)].map((_, index) => (

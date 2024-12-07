@@ -359,7 +359,7 @@ body {
   font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol';
-  font-size: 16px;
+  font-size: 13px;
   color: #ffffff;
 }
 
@@ -369,7 +369,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'JetBrains Mono', monospace;
+    font-family: Favorit, Helvetica, Arial, sans-serif;
   margin: 0 0 0.5rem;
   line-height: 1.25;
   color: rgb(230, 221, 221)
@@ -384,7 +384,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: 1.2rem;
 }
 
 h4 {
@@ -450,8 +450,10 @@ a:hover {
   width: 25%;
 }
 
+/* main background color */
 .min-100-vh {
   min-height: 100vh;
+  background-color: #000000;
 }
 
 .min-100-vw {
@@ -1170,7 +1172,7 @@ label form [type='radio'] {
 
 .container {
   width: 85%;
-  max-width: 1200px;
+  max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1725,12 +1727,13 @@ body {
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(120deg, #191a16, #6c00ff);
+  background: linear-gradient(120deg, #3ade2b, #6004e0);
   padding: 80px 20px;
   text-align: center;
   color: #fff;
   border-radius: 10px;
   margin-bottom: 50px;
+  background-image: url("/src/assets/4.jpg");
 }
 
 .hero-section h1 {
@@ -1765,12 +1768,20 @@ body {
 /* Featured Event */
 .featured-event {
   margin-bottom: 50px;
+    font-family: "Work Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
 }
 
 .featured-event h2 {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 20px;
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .event-container {
@@ -1787,7 +1798,6 @@ body {
 
 .event-image {
   width: 100%;
-  border-radius: 10px;
 }
 
 .event-details {
@@ -1816,32 +1826,44 @@ body {
 }
 
 /* Upcoming Events */
+.upcoming-events {
+min-height: 10vh;
+}
+
 .upcoming-events h2 {
   font-size: 2rem;
-  text-align: center;
+  /* text-align: center; */
   margin-bottom: 20px;
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.top-margin {
+  margin-top: 50px;
 }
 
 .events-grid {
   display: flex;
-  gap: 20px;
+  gap: 130px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
+
+
 .event-card {
-  background-color: #040404;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #161616;
+  padding: 10px;
+
   max-width: 300px;
-  text-align: center;
-  border: 10px;
-  border-color: #222121;
+  /* text-align: center; */
+  border: 1px solid #2f2f2f; /* Purple border color */
 }
 
 .event-card img {
   width: 100%;
-  border-radius: 10px;
   margin-bottom: 15px;
 }
 
@@ -1871,11 +1893,16 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  padding-top: 10px;
   font-variation-settings:
     "BLED" 0,
     "SCAN" 0,
     "XELA" 0,
     "YELA" 0;
+}
+
+.top-margin {
+  margin-top: 40px;
 }
 
 .logo {
@@ -1884,4 +1911,22 @@ body {
     font-style: normal;
     color: white;
   }
+
+.logo-header {
+width: 130px;
+height: auto;
+}
   
+.blinking-text {
+  animation: blink 0.25s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1; /* Fully visible */
+  }
+  50% {
+    opacity: 0.75; /* Fully hidden */
+  }
+}
+

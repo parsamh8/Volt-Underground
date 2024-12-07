@@ -5,10 +5,16 @@
   right: 0;
   width: 250px;
   height: 100vh;
-  background-color: rgb(36, 50, 64);
+  background-color: rgb(25, 26, 28);
   transform: translateX(100%);
   transition: transform 0.3s ease;
   z-index: 1040;
+}
+
+.bg-light-nav {
+  --bs-bg-opacity: 1;
+  background-color: rgb(25, 26, 28) !important;
+  border-radius: 8px;
 }
 
 .navbar-collapse.show {
@@ -87,6 +93,7 @@ nav ul {
   position: relative;
   left: 2vw;
   color: white;
+  font-size: 18px;
 }
 
 .nav-link:hover {
@@ -115,12 +122,4 @@ a:-webkit-any-link {
   text-decoration: none;
   color: white;
   font-weight: bold;
-}
-
-
-
-.bg-light-nav {
-  --bs-bg-opacity: 1;
-  background-color: rgb(63, 98, 131) !important;
-  border-radius: 8px;
 }

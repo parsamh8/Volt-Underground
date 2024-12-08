@@ -1,3 +1,4 @@
+// Cart design tutorial and boiler plate used and modified from PedroTech on YouTube
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/Shop-Context";
 
@@ -7,12 +8,11 @@ interface CartItemProps {
     id: number;
     productName: string;
     price: number;
-    productImage: string;
   };
 }
 
 export const CartItem: React.FC<CartItemProps> = ({ data }) => {
-  const { id, productName, price, productImage } = data;
+  const { id, productName, price} = data;
 
   // Define the ShopContext type
   const shopContext = useContext(ShopContext);
@@ -24,20 +24,19 @@ export const CartItem: React.FC<CartItemProps> = ({ data }) => {
 
   return (
     <div className="cartItem">
-      <img src={productImage} alt={productName} />
       <div className="description">
         <p>
           <b>{productName}</b>
         </p>
         <p>Price: ${price}</p>
         <div className="countHandler">
-          <button onClick={() => removeFromCart(id)}> - </button>
+          <button onClick={() => removeFromCart(id)}> Remove from Cart</button>
           <input
             type="number"
             value={cartItems[id] || 0}
             onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
           />
-          <button onClick={() => addToCart(id)}> + </button>
+          <button onClick={() => addToCart(id)}> Add to Cart </button>
         </div>
       </div>
     </div>

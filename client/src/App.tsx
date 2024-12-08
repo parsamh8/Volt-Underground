@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
-
+import { ShopContextProvider } from "./context/Shop-Context";
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -42,7 +42,9 @@ function App() {
       <div className="flex-column justify-flex-start min-100-vh">
         <Header />
         <div className="container">
+        <ShopContextProvider>
           <Outlet />
+          </ShopContextProvider>
         </div>
         <Footer />
       </div>

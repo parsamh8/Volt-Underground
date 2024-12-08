@@ -1,3 +1,4 @@
+// Cart design tutorial used and modified from PedroTech on YouTube
 import { createContext, useState, ReactNode } from "react";
 import { PRODUCTS } from "../Events";
 
@@ -6,7 +7,6 @@ interface Product {
     id: number;
     productName: string;
     price: number;
-    productImage: string;
 }  
 
 // Define the type for the cart
@@ -22,13 +22,22 @@ interface ShopContextValue {
   checkout: () => void;
 }
 
+const defaultShopContext: ShopContextValue = {
+    cartItems: {},
+    addToCart: () => {},
+    updateCartItemCount: () => {},
+    removeFromCart: () => {},
+    getTotalCartAmount: () => 0,
+    checkout: () => {},
+  };
+
 // Define the props for the provider
 interface ShopContextProviderProps {
   children: ReactNode;
 }
 
 // Create the context with the appropriate type
-export const ShopContext = createContext<ShopContextValue | null>(null);
+export const ShopContext = createContext<ShopContextValue>(defaultShopContext);
 
 // Function to generate the default cart
 const getDefaultCart = (): Cart => {

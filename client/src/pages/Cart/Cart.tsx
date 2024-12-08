@@ -1,7 +1,13 @@
-// Cart design tutorial used and modified from PedroTech on YouTube
+// Boiler plate code used from M18A26
 import { /*Navigate,*/ useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { useContext } from "react";
+import { ShopContext } from "../../context/Shop-Context";
+import { PRODUCTS } from "../../Events";
+import { CartItem } from "./Cart-Item";
+import { useNavigate } from "react-router-dom";
 
+import "./cart.css";
 import ThoughtForm from '../../components/ThoughtForm';
 // import ThoughtList from '../../components/ThoughtList';
 
@@ -22,19 +28,47 @@ const Cart = () => {
   // This if condition checks if the user is logged in and if the logged-in user's username matches the userParam.
   if (Auth.loggedIn() /*&& Auth.getProfile().data.username === userParam*/) {
     // If the condition is true, it navigates to the "/me" route, which is likely the user's profile page.
+    const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
+    
+    const totalAmount = getTotalCartAmount();
+
+    const navigate = useNavigate();
+
     return (
-      <div className="cart">
+      <div className="cart_head">
 
         <div>
           <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
             Shopping Cart
           </h2>
         </div>
-        <div className="cart-items">
-          {/* {EVENTS.map((Event)=> {
+        <div className="cart_head">
+      <div className="cart">
+        {PRODUCTS.map((product) => {
+          if (cartItems[product.id] !== 0) {
+            return <CartItem data={product} />;
+          }
+        })}
+      </div>
 
-          })} */}
+      {totalAmount > 0 ? (
+        <div className="checkout">
+          <p> Subtotal: ${totalAmount} </p>
+          <button onClick={() => navigate("/")}> Continue Shopping </button>
+          <button
+            onClick={() => {
+              checkout();
+              navigate("/checkout");
+            }}
+          >
+            {" "}
+            Checkout{" "}
+          </button>
         </div>
+      ) : (
+        <h1> Your Shopping Cart is Empty</h1>
+      )}
+    </div>
         {!userParam && (
           <div
             className="col-12 col-md-10 mb-3 p-3"

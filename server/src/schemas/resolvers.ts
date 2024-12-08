@@ -1,4 +1,4 @@
-import { Thought, User } from '../models/index.js';
+import { Thought, User, Event } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js'; 
 
 // Define types for the arguments
@@ -64,6 +64,17 @@ const resolvers = {
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
     },
+    events: async () => {
+      try {
+        // Fetch events from the database
+        const events = await Event.find();
+        return events;
+      } catch (error) {
+        console.error('Error fetching events:', error);
+        throw new Error('Unable to fetch events');
+      }
+    }
+    
   },
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {
@@ -168,6 +179,20 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    createEvent: async (_parent:any, { posterUrl, title, price, address, venue, date, time, ticketLink }:any) => {
+      const newEvent = new Event({
+        posterUrl, 
+        title, 
+        price, 
+        address, 
+        venue, 
+        date, 
+        time, 
+        ticketLink
+      });
+      await newEvent.save();
+      return newEvent;
+    }
   },
 };
 

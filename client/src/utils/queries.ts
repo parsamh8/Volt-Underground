@@ -16,13 +16,19 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_EVENTS = gql`
-  query getEvents {
-    events {
-      id
-      productName
-      price
-    }
+  query Query {
+  events {
+    id
+    posterUrl
+    title
+    price
+    address
+    venue
+    date
+    time
+    ticketLink
   }
+}
 `;
 
 export const QUERY_SINGLE_THOUGHT = gql`

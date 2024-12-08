@@ -6,13 +6,11 @@ import {
   ApolloProvider,
   createHttpLink
 } from '@apollo/client';
-import { MockedProvider } from '@apollo/client/testing';
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 import { ShopContextProvider } from "./context/Shop-Context";
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { QUERY_EVENTS } from './utils/queries';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -32,21 +30,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const mocks = [
-  {
-    request: {
-      query: QUERY_EVENTS,
-    },
-    result: {
-      data: {
-        events: [
-          { id: '1', productName: 'Event A', price: 50}
-        ]
-      }
-    }
-  }
-]
-
 const client = new ApolloClient({
   // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
@@ -59,11 +42,9 @@ function App() {
       <div className="flex-column justify-flex-start min-100-vh">
         <Header />
         <div className="container">
-        <MockedProvider mocks={mocks} addTypename={false}>
         <ShopContextProvider>
           <Outlet />
           </ShopContextProvider>
-        </MockedProvider>
         </div>
         <Footer />
       </div>

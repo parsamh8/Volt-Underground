@@ -7,7 +7,6 @@ import { CartItem } from "./Cart-Item";
 import { useNavigate } from "react-router-dom";
 
 import "./cart.css";
-import ThoughtForm from '../../components/ThoughtForm';
 // import ThoughtList from '../../components/ThoughtList';
 
 import { QUERY_USER, QUERY_ME, QUERY_EVENTS } from '../../utils/queries';
@@ -46,7 +45,7 @@ const Cart = () => {
       <div className="cart">
         {events.map((event:any) => {
           if (cartItems[event.id] !== 0) {
-            return <CartItem data={event} />;
+            return <CartItem key={event.id} data={event} />;
           }
         })}
       </div>
@@ -74,7 +73,7 @@ const Cart = () => {
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
           >
-            <ThoughtForm />
+            
           </div>
         )}
       </div>

@@ -4,9 +4,15 @@ import { PRODUCTS } from "../Events";
 
 // Define the type for the product
 interface Product {
-    id: number;
-    productName: string;
-    price: number;
+  posterUrl: string,
+  id: number,
+  title: string,
+  price: number,
+  address: string,
+  venue: string,
+  date: string,
+  time: string,
+  ticketLink: string
 }  
 
 // Define the type for the cart
@@ -65,19 +71,19 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
     return totalAmount;
   };
 
-  const addToCart = (itemId: number): void => {
+  const addToCart = (itemId: number) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
   };
 
-  const removeFromCart = (itemId: number): void => {
+  const removeFromCart = (itemId: number) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
   };
 
-  const updateCartItemCount = (newAmount: number, itemId: number): void => {
+  const updateCartItemCount = (newAmount: number, itemId: number) => {
     setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
   };
 
-  const checkout = (): void => {
+  const checkout = () => {
     setCartItems(getDefaultCart());
   };
 

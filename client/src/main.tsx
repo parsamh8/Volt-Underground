@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         path: '/thoughts/:thoughtId',
         element: <SingleThought />
       },{
-        path: '/session',
+        path: '/session/:eventId',
         element: <Session />
       }
     ]

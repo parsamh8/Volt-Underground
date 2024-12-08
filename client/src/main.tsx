@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/Error';
+import Cart from './pages/Cart/Cart.js';
 
 const router = createBrowserRouter([
   {
@@ -26,8 +27,8 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       }, {
-        path: '/profiles/:username',
-        element: <Profile />
+        path: '/profiles/cart',
+        element: <Cart />
       }, {
         path: '/me',
         element: <Profile />

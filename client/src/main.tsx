@@ -10,6 +10,7 @@ import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/Error';
 import Cart from './pages/Cart/Cart.js';
+import Session from './pages/Session/Session.js';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
       }, {
         path: '/thoughts/:thoughtId',
         element: <SingleThought />
+      },{
+        path: '/session',
+        element: <Session />
       }
     ]
   },

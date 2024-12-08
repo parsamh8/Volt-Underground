@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white space">
+    <main className="mx-auto flex min-h-screen w-full items-center justify-center bg-zinc-900 text-white space">
       {data ? (
         <p>
           Success! You may now head <Link to="/">back to the homepage.</Link>
@@ -50,7 +50,7 @@ const Login = () => {
         >
           <div className="text-center text-4xl font-medium">Log In</div>
 
-          <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
+          <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-violet-500">
             <input
               placeholder="Your email"
               name="email"
@@ -61,7 +61,7 @@ const Login = () => {
             />
           </div>
 
-          <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
+          <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-violet-500">
             <input
               placeholder="******"
               name="password"
@@ -72,7 +72,7 @@ const Login = () => {
             />
           </div>
 
-          <button className="transform rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400">
+          <button className="transform rounded-sm bg-violet-700 py-2 font-bold duration-300 hover:bg-violet-900">
             LOG IN
           </button>
 
@@ -87,7 +87,7 @@ const Login = () => {
             No account?
             <a
               href="/signup"
-              className="font-medium text-indigo-500 underline-offset-4 hover:underline ml-2"
+              className="font-medium text-violet-500 underline-offset-4 hover:underline ml-2"
             >
               Create One
             </a>

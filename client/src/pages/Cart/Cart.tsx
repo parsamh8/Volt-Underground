@@ -3,7 +3,6 @@ import { /*Navigate,*/ useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useContext } from "react";
 import { ShopContext } from "../../context/Shop-Context";
-import { PRODUCTS } from "../../Events";
 import { CartItem } from "./Cart-Item";
 import { useNavigate } from "react-router-dom";
 
@@ -11,10 +10,9 @@ import "./cart.css";
 import ThoughtForm from '../../components/ThoughtForm';
 // import ThoughtList from '../../components/ThoughtList';
 
-import { QUERY_USER, QUERY_ME } from '../../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_EVENTS } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
-
 
 const Cart = () => {
   const { username: userParam } = useParams();
@@ -23,8 +21,10 @@ const Cart = () => {
     variables: { username: userParam },
   });
 
-  const user = data?.me || data?.user || {};
+  const { loading: _eventsLoading, data: eventsData } = useQuery(QUERY_EVENTS);
 
+  const user = data?.me || data?.user || {};
+  const events = eventsData?.events || [];
   // This if condition checks if the user is logged in and if the logged-in user's username matches the userParam.
   if (Auth.loggedIn() /*&& Auth.getProfile().data.username === userParam*/) {
     // If the condition is true, it navigates to the "/me" route, which is likely the user's profile page.
@@ -44,9 +44,9 @@ const Cart = () => {
         </div>
         <div className="cart_head">
       <div className="cart">
-        {PRODUCTS.map((product) => {
-          if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
+        {events.map((event:any) => {
+          if (cartItems[event.id] !== 0) {
+            return <CartItem data={event} />;
           }
         })}
       </div>

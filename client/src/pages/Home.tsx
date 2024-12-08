@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client';
 
-import ThoughtList from '../components/ThoughtList/index.tsx';
+import ThoughtList from '../components/EventsList/index.tsx';
 import ThoughtForm from '../components/ThoughtForm/index.tsx';
 
-import { QUERY_THOUGHTS } from '../utils/queries.ts';
+import { QUERY_EVENTS } from '../utils/queries.ts';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_THOUGHTS);
+  const { loading, data } = useQuery(QUERY_EVENTS);
   const thoughts = data?.thoughts || [];
 
   return (

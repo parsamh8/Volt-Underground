@@ -1,7 +1,9 @@
 import './index.css'
-
+import { ShopContext } from "../../context/Shop-Context";
+import { useContext } from 'react';
 // interface Class {
 //   posterUrl: string,
+//   id: number,
 //   title: string,
 //   description: string,
 //   venue: string,
@@ -10,7 +12,13 @@ import './index.css'
 //   ticketLink: string
 // }
 
-const Session = ({title='abc', description='cab', venue='abc', date='abc', time='abc', ticketLink='abc' }) => {
+const Session = ({id=1, title='abc', description='cab', venue='abc', date='abc', time='abc', ticketLink='abc' }) => {
+  const shopContext = useContext(ShopContext);
+  if (!shopContext) {
+    throw new Error("ShopContext is not provided");
+  }
+
+  const { addToCart } = shopContext;
   return (
     <div className="event-session Ticket">
       <div className="event-details">
@@ -38,11 +46,12 @@ const Session = ({title='abc', description='cab', venue='abc', date='abc', time=
         <p><strong>Location:</strong> {venue}</p>
         <p><strong>Date:</strong> {date}</p>
         <p><strong>Time:</strong> {time}</p>
+        <p><strong>Ticket Link:</strong> {ticketLink}</p>
         <div className='session-img'>
           <img src={'/src/assets/logo-light.png'}/>
         </div>
-        <button className="session-ticket-button" onClick={() => window.open(ticketLink, '_blank')}>
-          Buy Ticket
+        <button className="session-ticket-button" onClick={() => addToCart(id)}>
+          Add Ticket to Cart
         </button>
       </div>
     </div>

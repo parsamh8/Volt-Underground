@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+import { QUERY_EVENTS, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
@@ -15,7 +15,7 @@ const ThoughtForm = () => {
   const [addThought, { error }] = useMutation
   (ADD_THOUGHT, {
     refetchQueries: [
-      QUERY_THOUGHTS,
+      QUERY_EVENTS,
       'getThoughts',
       QUERY_ME,
       'me'

@@ -1,16 +1,16 @@
 import './index.css'
 
-interface Class {
-  posterUrl: string,
-  title: string,
-  description: string,
-  venue: string,
-  date: string,
-  time: string,
-  ticketLink: string
-}
+// interface Class {
+//   posterUrl: string,
+//   title: string,
+//   description: string,
+//   venue: string,
+//   date: string,
+//   time: string,
+//   ticketLink: string
+// }
 
-const Session = ({ posterUrl, title, description, venue, date, time, ticketLink }: Class) => {
+const Session = ({title='abc', description='cab', venue='abc', date='abc', time='abc', ticketLink='abc' }) => {
   return (
     <div className="event-session Ticket">
       <div className="event-details">

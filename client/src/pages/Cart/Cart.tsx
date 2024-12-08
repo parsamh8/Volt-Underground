@@ -3,14 +3,12 @@ import { /*Navigate,*/ useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import ThoughtForm from '../../components/ThoughtForm';
-import ThoughtList from '../../components/ThoughtList';
+// import ThoughtList from '../../components/ThoughtList';
 
 import { QUERY_USER, QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
-
-import { EVENTS } from '../../Events';
 
 const Cart = () => {
   const { username: userParam } = useParams();
@@ -33,9 +31,9 @@ const Cart = () => {
           </h2>
         </div>
         <div className="cart-items">
-          {EVENTS.map((Event)=> {
+          {/* {EVENTS.map((Event)=> {
 
-          })}
+          })} */}
         </div>
         {!userParam && (
           <div

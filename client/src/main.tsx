@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/Error';
+import Cart from './pages/Cart/Cart.js';
 import Session from './pages/Session/Session.js';
 
 const router = createBrowserRouter([
@@ -27,8 +28,8 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       }, {
-        path: '/profiles/:username',
-        element: <Profile />
+        path: '/cart',
+        element: <Cart />
       }, {
         path: '/me',
         element: <Profile />
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
         path: '/thoughts/:thoughtId',
         element: <SingleThought />
       },{
-        path: '/session',
+        path: '/session/:eventId',
         element: <Session />
       }
     ]

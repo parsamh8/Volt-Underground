@@ -6,6 +6,18 @@ const typeDefs = `
     password: String
     thoughts: [Thought]!
   }
+  
+  type Event {
+    id: ID,
+    posterUrl: String,
+    title: String,
+    price: Float,
+    address: String,
+    venue: String,
+    date: String,
+    time: String,
+    ticketLink: String
+  }
 
   type Thought {
     _id: ID
@@ -38,6 +50,7 @@ const typeDefs = `
   }
 
   type Query {
+    events: [Event!]!
     users: [User]
     user(username: String!): User
     thoughts: [Thought]!
@@ -52,6 +65,16 @@ const typeDefs = `
     addComment(thoughtId: ID!, commentText: String!): Thought
     removeThought(thoughtId: ID!): Thought
     removeComment(thoughtId: ID!, commentId: ID!): Thought
+    createEvent(
+    posterUrl: String,
+    title: String,
+    price: Float,
+    address: String,
+    venue: String,
+    date: String,
+    time: String,
+    ticketLink: String
+  ): Event
   }
 `;
 

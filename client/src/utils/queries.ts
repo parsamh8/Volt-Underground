@@ -15,15 +15,20 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-    }
+export const QUERY_EVENTS = gql`
+  query Query {
+  events {
+    id
+    posterUrl
+    title
+    price
+    address
+    venue
+    date
+    time
+    ticketLink
   }
+}
 `;
 
 export const QUERY_SINGLE_THOUGHT = gql`

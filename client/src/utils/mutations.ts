@@ -24,6 +24,21 @@ export const ADD_USER = gql`
 }
 `;
 
+export const ADD_EVENT = gql`
+  mutation AddThought($input: ThoughtInput!) {
+    addThought(input: $input) {
+      _id
+      thoughtText
+      thoughtAuthor
+      creaetedAt
+      comments {
+        _id
+        commentText
+      }
+    }
+  }
+`;
+
 export const ADD_THOUGHT = gql`
   mutation AddThought($input: ThoughtInput!) {
     addThought(input: $input) {

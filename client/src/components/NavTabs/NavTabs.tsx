@@ -78,8 +78,8 @@ function NavTabs() {
                 {/* Retrieving the logged-in user's profile to display the username */}
                 <div className="nav-link">View Profile</div>
               </NavLink>
-              <NavLink className="nav-item" to="/profiles/:username">
-                <li className="nav-link">Checkout</li>
+              <NavLink className="nav-item" to="/cart">
+                <li className="nav-link">Cart</li>
               </NavLink>
               <div className="nav-item">
                 <button className="nav-link" onClick={logout}>

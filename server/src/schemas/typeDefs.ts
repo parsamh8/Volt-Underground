@@ -8,15 +8,15 @@ const typeDefs = `
   }
   
   type Event {
-    id: ID,
-    posterUrl: String,
-    title: String,
-    price: Float,
-    address: String,
-    venue: String,
-    date: String,
-    time: String,
-    ticketLink: String
+    id: Int!
+    posterUrl: String!
+    title: String!
+    price: Float!
+    address: String!
+    venue: String!
+    date: String!
+    time: String!
+    ticketLink: String!
   }
 
   type Thought {

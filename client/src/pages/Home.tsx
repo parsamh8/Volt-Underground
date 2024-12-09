@@ -88,7 +88,7 @@ const Home = () => {
               events.slice(0, 3).map((event:any, index:any) => (
                 <div key={index} className="event-card">
                   <img
-                    src={event.ticketLink || "https://via.placeholder.com/300x200"} // Add fallback
+                    src={event.posterUrl || "https://via.placeholder.com/300x200"} // Add fallback
                     alt={`Event ${event.id}`}
                     className="event-image"
                   />

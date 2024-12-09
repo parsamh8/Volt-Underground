@@ -1,9 +1,9 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_EVENTS } from "../utils/queries";
+import { createContext, useState, ReactNode, useEffect } from "react";
+import { useQuery } from '@apollo/client';
+import { QUERY_EVENTS } from '../utils/queries';
 
-// Define the type for the product
-interface Product {
+// Define the type for the event
+interface Event {
   posterUrl: string;
   id: number;
   title: string;
@@ -45,22 +45,40 @@ interface ShopContextProviderProps {
 // Create the context with the appropriate type
 export const ShopContext = createContext<ShopContextValue>(defaultShopContext);
 
-// Function to generate the default cart from localStorage
-const getCartFromLocalStorage = (): Cart => {
+// Function to load the cart from localStorage
+const loadCartFromLocalStorage = (): Cart => {
   const cart = localStorage.getItem("cartItems");
-  return cart ? JSON.parse(cart) : {}; // If cart is in localStorage, parse it; otherwise, return an empty object
+  return cart ? JSON.parse(cart) : {}; // Load from localStorage or return an empty cart
+};
+
+// Function to generate the default cart based on the events
+const getDefaultCart = (events: Event[]): Cart => {
+  const cart: Cart = {};
+  events.forEach((event) => {
+    cart[event.id] = 0;  // Initialize cart with each event ID and set the amount to 0
+  });
+  return cart;
 };
 
 // Context provider component
 export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
-  const { data } = useQuery(QUERY_EVENTS);
-  const events = data?.events || [];
+  const { data: eventsData } = useQuery(QUERY_EVENTS);
+  const events = eventsData?.events || [];
 
-  const [cartItems, setCartItems] = useState<Cart>(getCartFromLocalStorage());
+  // Initialize cartItems state from localStorage (if available)
+  const [cartItems, setCartItems] = useState<Cart>(loadCartFromLocalStorage);
 
+  // Ensure the cartItems are updated only once the events data is loaded
+  useEffect(() => {
+    if (events.length > 0 && Object.keys(cartItems).length === 0) {
+      setCartItems(getDefaultCart(events)); // Initialize if no cartItems are found
+    }
+  }, [events, cartItems]);
+
+  // Update localStorage whenever cartItems changes
   useEffect(() => {
     if (Object.keys(cartItems).length > 0) {
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem("cartItems", JSON.stringify(cartItems)); // Persist cart to localStorage
     }
   }, [cartItems]);
 
@@ -69,7 +87,7 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        const itemInfo = events.find((product: Product) => product.id === Number(item));
+        const itemInfo = events.find((event: Event) => event.id === Number(item));
         if (itemInfo) {
           totalAmount += cartItems[item] * itemInfo.price;
         }

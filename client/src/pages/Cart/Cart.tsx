@@ -37,7 +37,7 @@ const Cart = () => {
       <div className="cart_head">
 
         <div>
-          <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
+          <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5 rounded-heading">
             Shopping Cart
           </h2>
         </div>

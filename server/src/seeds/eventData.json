@@ -54,6 +54,17 @@
       "date": "2024-12-22",
       "time": "9:00 PM - 1:00 AM",
       "ticketLink": "https://picsum.photos/id/237/200/300"
-    }
+    },
+    {
+        "id": 6,
+        "posterUrl": "https://picsum.photos/id/237/200/300",
+        "title": "Dumpster Fire",
+        "price": 35.0,
+        "address": "654 Good Samaritain Rd, Charlotte, NC 28072",
+        "venue": "The Underground",
+        "date": "2024-12-22",
+        "time": "11:00 PM - 3:00 AM",
+        "ticketLink": "https://picsum.photos/id/237/200/300"
+      }
   ]
   

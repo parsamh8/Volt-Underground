@@ -62,7 +62,7 @@ export const CartItem: React.FC<CartItemProps> = ({ data }) => {
           <b>Ticket Link: </b> {ticketLink}
         </p>
         <p>
-          <b>Price: ${price.toFixed(2)}</b> 
+          <b>Price: ${price}</b> 
         </p>
       </div>
 

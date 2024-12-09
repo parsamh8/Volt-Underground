@@ -47,7 +47,7 @@ const Home = () => {
               <p>Date: {featuredEvent.date}</p>
               <p>Location: {featuredEvent.venue}</p>
               <p>Price: {featuredEvent.price}</p>
-              <p>Ticket Link: {featuredEvent.ticketLink}</p>
+              {/* <p>Ticket Link: {featuredEvent.ticketLink}</p> */}
               <Link to={`/session/${events[0].id}`}>
                     <button className="details-button">Details</button>
               </Link>

@@ -19,8 +19,8 @@ interface CartItemProps {
 
 export const CartItem: React.FC<CartItemProps> = ({ data }) => {
   const {
-    posterUrl,
     id,
+    posterUrl,
     title,
     price,
     address,

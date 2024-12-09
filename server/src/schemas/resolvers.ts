@@ -179,8 +179,9 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    createEvent: async (_parent:any, { posterUrl, title, price, address, venue, date, time, ticketLink }:any) => {
+    createEvent: async (_parent:any, { id, posterUrl, title, price, address, venue, date, time, ticketLink }:any) => {
       const newEvent = new Event({
+        id,
         posterUrl, 
         title, 
         price, 

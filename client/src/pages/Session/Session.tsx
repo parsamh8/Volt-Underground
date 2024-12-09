@@ -1,18 +1,34 @@
-import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import AuthService from '../../utils/auth'; // Update with the correct path
 import { ShopContext } from '../../context/Shop-Context';
+import { useQuery } from '@apollo/client';
+import { QUERY_EVENTS } from '../../utils/queries';
 
 const Session = () => {
-  const { eventId } = useParams<{ eventId: string }>(); // Get eventId from the URL
+  const { eventId } = useParams<{ eventId: string }>();
   const event_id = eventId ? parseInt(eventId) : NaN;
-
+  const navigate = useNavigate(); // Use the hook here
   const shopContext = useContext(ShopContext);
+  const { loading: _eventsLoading, data } = useQuery(QUERY_EVENTS);
+  const events = data?.events || [];
 
   if (!shopContext) {
-    throw new Error("ShopContext is not provided.");
+    throw new Error('ShopContext is not provided.');
   }
 
   const { addToCart } = shopContext;
+
+  useEffect(() => {
+    if (!AuthService.loggedIn()) {
+      navigate('/login'); // Redirect if not logged in
+    }
+  }, [navigate]);
+
+  const addTicket = (event_id: any) => {
+    addToCart(event_id);
+    navigate('/cart'); // Navigate to cart after adding a ticket
+  };
 
   return (
     <div className="event-session Ticket">
@@ -22,7 +38,7 @@ const Session = () => {
 
         {/* Event Description */}
         <div className="event-description">
-          <h1>Event Title</h1>
+          <h1>{events[event_id-1].title}</h1>
           <p>Event Description</p>
         </div>
       </div>
@@ -31,11 +47,11 @@ const Session = () => {
       <div className="venue-info">
         <h2>Session Information</h2>
         <p><strong>Description:</strong> Lorem ipsum dolor sit amet...</p>
-        <p><strong>Location:</strong> Event Venue</p>
-        <p><strong>Date:</strong> Event Date</p>
-        <p><strong>Time:</strong> Event Time</p>
-        <p><strong>Ticket Link:</strong> <a href="#">Buy Tickets</a></p>
-        <button className="session-ticket-button" onClick={() => addToCart(event_id)}>
+        <p><strong>Location:</strong> {events[event_id-1].venue} </p>
+        <p><strong>Date:</strong> {events[event_id-1].date} </p>
+        <p><strong>Time:</strong> {events[event_id-1].time} </p>
+        <p><strong>Ticket Link:</strong> <a href="#">{events[event_id-1].ticketLink}</a></p>
+        <button className="session-ticket-button" onClick={() => addTicket(event_id)}>
           Add Ticket to Cart
         </button>
       </div>

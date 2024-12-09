@@ -48,8 +48,8 @@ const Home = () => {
               <p>Location: {featuredEvent.venue}</p>
               <p>Price: {featuredEvent.price}</p>
               <p>Ticket Link: {featuredEvent.ticketLink}</p>
-              <Link to={'/session'}>
-                <button className="details-button">Details</button>
+              <Link to={`/session/${events[0].id}`}>
+                    <button className="details-button">Details</button>
               </Link>
             </div>
           </div>
@@ -88,7 +88,7 @@ const Home = () => {
               events.slice(0, 3).map((event:any, index:any) => (
                 <div key={index} className="event-card">
                   <img
-                    src={event.ticketLink || "https://via.placeholder.com/300x200"} // Add fallback
+                    src={event.posterUrl || "https://via.placeholder.com/300x200"} // Add fallback
                     alt={`Event ${event.id}`}
                     className="event-image"
                   />

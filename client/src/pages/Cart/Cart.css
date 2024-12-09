@@ -41,3 +41,7 @@
     margin: 10px;
     cursor: pointer;
   }
+
+  .rounded-heading {
+    border-radius: 10px;
+  }

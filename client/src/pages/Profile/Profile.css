@@ -1,0 +1,46 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Reduced minimum size */
+    gap: 0.75rem; /* Slightly smaller gap */
+    margin-top: 20px;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #1c1c1e;
+    border: 1px solid #3a3a3c;
+    border-radius: 0.5rem;
+    padding: 0.75rem; /* Reduced padding */
+    height: 100%;
+  }
+  
+  .card-title {
+    font-size: 1.125rem; /* Slightly smaller font size */
+    font-weight: bold;
+  }
+  
+  .card-button {
+    margin-top: auto;
+    padding: 0.4rem 0.8rem; /* Smaller button padding */
+    background-color: #6366f1;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.25rem;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .card-button:hover {
+    background-color: #4f46e5;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px; /* Slightly smaller margin */
+  }
+  

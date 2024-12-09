@@ -10,12 +10,12 @@ const typeDefs = `
   type Event {
     id: Int!
     posterUrl: String!
-    title: String!
-    price: Float!
+    title: String
+    price: String
     address: String!
-    venue: String!
-    date: String!
-    time: String!
+    venue: String
+    date: String
+    time: String
     ticketLink: String!
   }
 

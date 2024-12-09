@@ -4,6 +4,7 @@ import AuthService from '../../utils/auth'; // Update with the correct path
 import { ShopContext } from '../../context/Shop-Context';
 import { useQuery } from '@apollo/client';
 import { QUERY_EVENTS } from '../../utils/queries';
+import './index.css';
 
 const Session = () => {
   const { eventId } = useParams<{ eventId: string }>();
@@ -50,7 +51,7 @@ const Session = () => {
         <p><strong>Location:</strong> {events[event_id-1].venue} </p>
         <p><strong>Date:</strong> {events[event_id-1].date} </p>
         <p><strong>Time:</strong> {events[event_id-1].time} </p>
-        <p><strong>Ticket Link:</strong> <a href="#">{events[event_id-1].ticketLink}</a></p>
+        <p><strong>Price:</strong> {events[event_id-1].price}</p>
         <button className="session-ticket-button" onClick={() => addTicket(event_id)}>
           Add Ticket to Cart
         </button>

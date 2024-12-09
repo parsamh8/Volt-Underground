@@ -48,8 +48,8 @@ const Home = () => {
               <p>Location: {featuredEvent.venue}</p>
               <p>Price: {featuredEvent.price}</p>
               <p>Ticket Link: {featuredEvent.ticketLink}</p>
-              <Link to={'/session'}>
-                <button className="details-button">Details</button>
+              <Link to={`/session/${events[0].id}`}>
+                    <button className="details-button">Details</button>
               </Link>
             </div>
           </div>

@@ -1789,7 +1789,7 @@ body {
 
 .event-container {
   display: flex;
-  gap: 20px;
+  gap: 5px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -1797,10 +1797,13 @@ body {
 
 .event-image-wrapper {
   flex: 1;
+  width: 100%;
 }
 
 .event-image {
-  width: 100%;
+  width: 90%;
+  height: 400px;
+
 }
 
 .event-details {
@@ -1867,7 +1870,7 @@ min-height: 10vh;
 
 .event-card img {
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .event-card h3 {

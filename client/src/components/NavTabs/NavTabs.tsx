@@ -58,6 +58,7 @@ function NavTabs() {
         id="navbarNav"
         ref={menuRef} // Attach the ref here
       >
+        <div className='navbar-header'>
         <button
           className="close-button"
           type="button"
@@ -66,7 +67,9 @@ function NavTabs() {
         >
           ×
         </button>
+        </div>
         {/* Return navbar links with client-side routing */}
+        <div>
         <ul className="nav flex-column">
           <NavLink className="nav-item" to="/">
             <li className="nav-link">Home</li>
@@ -98,6 +101,7 @@ function NavTabs() {
             </>
           )}
         </ul>
+        </div>
       </div>
     </nav>
   );

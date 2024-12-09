@@ -39,14 +39,13 @@ const Session = () => {
         {/* Event Description */}
         <div className="event-description">
           <h1>{events[event_id-1].title}</h1>
-          <p>Event Description</p>
+          <p>{events[event_id-1].description}</p>
         </div>
       </div>
 
       {/* Venue Information */}
       <div className="venue-info">
         <h2>Session Information</h2>
-        <p><strong>Description:</strong> Lorem ipsum dolor sit amet...</p>
         <p><strong>Location:</strong> {events[event_id-1].venue} </p>
         <p><strong>Date:</strong> {events[event_id-1].date} </p>
         <p><strong>Time:</strong> {events[event_id-1].time} </p>

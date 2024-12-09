@@ -11,6 +11,7 @@ const typeDefs = `
     id: Int!
     posterUrl: String!
     title: String
+    description: String
     price: String
     address: String!
     venue: String
@@ -68,6 +69,7 @@ const typeDefs = `
     createEvent(
     posterUrl: String,
     title: String,
+    description: String,
     price: Float,
     address: String,
     venue: String,

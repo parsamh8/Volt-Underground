@@ -21,6 +21,7 @@ export const QUERY_EVENTS = gql`
     id
     posterUrl
     title
+    description
     price
     address
     venue

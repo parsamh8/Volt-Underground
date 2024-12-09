@@ -4,6 +4,7 @@ import AuthService from '../../utils/auth'; // Update with the correct path
 import { ShopContext } from '../../context/Shop-Context';
 import { useQuery } from '@apollo/client';
 import { QUERY_EVENTS } from '../../utils/queries';
+import './index.css';
 
 const Session = () => {
   const { eventId } = useParams<{ eventId: string }>();
@@ -34,22 +35,24 @@ const Session = () => {
       <div className="event-details">
         {/* Event Poster */}
         <div className="event-border"></div>
-
+        <div className="separator"></div>
         {/* Event Description */}
         <div className="event-description">
           <h1>{events[event_id-1].title}</h1>
-          <p>Event Description</p>
+          <p>{events[event_id-1].description}</p>
         </div>
       </div>
 
       {/* Venue Information */}
       <div className="venue-info">
         <h2>Session Information</h2>
-        <p><strong>Description:</strong> Lorem ipsum dolor sit amet...</p>
         <p><strong>Location:</strong> {events[event_id-1].venue} </p>
         <p><strong>Date:</strong> {events[event_id-1].date} </p>
         <p><strong>Time:</strong> {events[event_id-1].time} </p>
-        <p><strong>Ticket Link:</strong> <a href="#">{events[event_id-1].ticketLink}</a></p>
+        <p><strong>Price:</strong> {events[event_id-1].price}</p>
+        <div className='session-img'>
+          <img src={events[event_id-1].posterUrl} alt='image of the event' />
+        </div>
         <button className="session-ticket-button" onClick={() => addTicket(event_id)}>
           Add Ticket to Cart
         </button>

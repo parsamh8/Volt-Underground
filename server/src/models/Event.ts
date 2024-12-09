@@ -5,6 +5,7 @@ interface IEvent extends Document {
   id: number;
   posterUrl: string;
   title: string;
+  description: string;
   price: number;
   address: string;
   venue: string;
@@ -30,6 +31,10 @@ const eventSchema = new Schema<IEvent>({
     minlength: 1,
     maxlength: 280,
     trim: true,
+  },
+    description: {
+      type: String,
+      required: true,
   },
   price: {
     type: Number,

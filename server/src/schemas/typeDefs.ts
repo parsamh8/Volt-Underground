@@ -9,13 +9,14 @@ const typeDefs = `
   
   type Event {
     id: Int!
-    posterUrl: String!
-    title: String!
-    price: Float!
+    posterUrl: String
+    title: String
+    description: String
+    price: String
     address: String!
-    venue: String!
-    date: String!
-    time: String!
+    venue: String
+    date: String
+    time: String
     ticketLink: String!
   }
 
@@ -68,6 +69,7 @@ const typeDefs = `
     createEvent(
     posterUrl: String,
     title: String,
+    description: String,
     price: Float,
     address: String,
     venue: String,

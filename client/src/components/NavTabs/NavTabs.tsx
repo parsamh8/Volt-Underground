@@ -36,14 +36,14 @@ function NavTabs() {
   }, []);
 
   return (
-    <nav className="navbar navbar-light bg-light bg-light-nav custom-dark-green">
+    <nav className="navbar navbar-light bg-light bg-light-nav">
       <div className="d-flex justify-content-between w-100">
         {!isMenuOpen && (
           <button
             className="navbar-toggler"
             type="button"
             aria-label="Toggle navigation"
-            onClick={toggleMenu} // Attach toggle menu to navbar toggler button
+            onClick={toggleMenu}
           >
             <img
               className="navbar-button-icon"
@@ -103,6 +103,10 @@ function NavTabs() {
         </ul>
         </div>
       </div>
+      <div
+        className={`overlay ${isMenuOpen ? "visible" : ""}`}
+        onClick={toggleMenu}
+      ></div>
     </nav>
   );
 }

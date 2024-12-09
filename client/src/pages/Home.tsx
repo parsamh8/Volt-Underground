@@ -85,7 +85,7 @@ const Home = () => {
           <h2>Past Events</h2>
           <div className="events-grid">
             {events.length > 0 ? (
-              events.slice(0, 3).map((event:any, index:any) => (
+              events.slice(3, 6).map((event:any, index:any) => (
                 <div key={index} className="event-card">
                   <img
                     src={event.posterUrl || "https://via.placeholder.com/300x200"} // Add fallback

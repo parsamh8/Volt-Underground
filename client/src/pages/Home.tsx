@@ -25,7 +25,7 @@ const Home = () => {
         {/* Hero Section */}
         <div className="hero-section">
           <div className="hero-content">
-            <h1>Boiler Room Video</h1>
+            <h1>Present Underground Sessions</h1>
             <p>Where beats meet the night. Discover the ultimate techno-house experience.</p>
             <button className="cta-button">Explore Events</button>
           </div>
@@ -42,8 +42,8 @@ const Home = () => {
                 className="event-image"
               />
             </div>
-            <div className="event-details">
-              <h3>{featuredEvent.title}</h3>
+            <div className="event-details p-ft">
+              <h4 className='fr-margin'>{featuredEvent.title}</h4>
               <p>Date: {featuredEvent.date}</p>
               <p>Location: {featuredEvent.venue}</p>
               <p>Price: {featuredEvent.price}</p>
@@ -81,7 +81,7 @@ const Home = () => {
         </section>
 
         {/* Past Events Section */}
-        <section className="upcoming-events top-margin">
+        <section className="past-events top-margin">
           <h2>Past Events</h2>
           <div className="events-grid">
             {events.length > 0 ? (

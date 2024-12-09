@@ -405,6 +405,16 @@ p {
   line-height: 1.5;
 }
 
+.p-ft p {
+  font-size: 1.0rem;
+  margin: 0 0 1rem;
+  line-height: 0.75;
+}
+
+.fr-margin {
+  margin-bottom: 20px;
+}
+
 ul,
 ol,
 dl {
@@ -1736,7 +1746,7 @@ body {
   color: #fff;
   border-radius: 10px;
   margin-bottom: 50px;
-  background-image: url("/src/assets/4.jpg");
+  background-image: url("/src/assets/hero.gif");
 }
 
 .hero-section h1 {
@@ -1765,7 +1775,7 @@ body {
 }
 
 .cta-button:hover {
-  background-color: #ddd;
+  background-color: #b4b4b4;
 }
 
 /* Featured Event */
@@ -1773,7 +1783,7 @@ body {
   margin-bottom: 50px;
     font-family: "Work Sans", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 300;
+    font-weight: 300px;
     font-style: normal;
 }
 
@@ -1831,51 +1841,88 @@ body {
   background-color: #e60072;
 }
 
-/* Upcoming Events */
-.upcoming-events {
-min-height: 10vh;
+/* Upcoming, Past Events */
+/* start */
+.event-card {
+  background-color: #161616;
+  padding: 10px; /* Increased padding for a larger look */
+  max-width: 350px;
+  border: 1px solid #2f2f2f;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .upcoming-events h2 {
-  font-size: 2rem;
-  /* text-align: center; */
-  margin-bottom: 20px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Work Sans", serif;
   font-optical-sizing: auto;
-  font-weight: 300;
+  font-weight: 200;
   font-style: normal;
 }
 
-.top-margin {
-  margin-top: 50px;
-}
-
-.events-grid {
-  display: flex;
-  gap: 130px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-
-
-.event-card {
-  background-color: #161616;
-  padding: 10px;
-
-  max-width: 300px;
-  /* text-align: center; */
-  border: 1px solid #2f2f2f; /* Purple border color */
+.past-events h2 {
+  font-family: "Work Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
 }
 
 .event-card img {
   width: 100%;
+  height: 250px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.events-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+  justify-items: center;
+  align-items: stretch;
+}
+
+.event-card p {
+  font-size: 1rem;
   margin-bottom: 5px;
+  color: #aaa;
 }
 
 .event-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1rem;
+  margin-bottom: 2px;
+  color: #fff;
+  font-family: "Work Sans", sans-serif;
+}
+
+.event-card p {
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+  color: #fff;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+}
+
+.event-card button {
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+  color: #fff;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+}
+
+.event-details button {
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+  color: #fff;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 450;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 10px rgba(108, 0, 255, 0.5);
 }
 
 .details-button {
@@ -1887,11 +1934,12 @@ min-height: 10vh;
   font-weight: bold;
   border-radius: 5px;
   text-transform: uppercase;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .details-button:hover {
   background-color: #431588;
+  transform: scale(1.05);
 }
 
 .slogan {

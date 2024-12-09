@@ -9,7 +9,7 @@ const typeDefs = `
   
   type Event {
     id: Int!
-    posterUrl: String!
+    posterUrl: String
     title: String
     description: String
     price: String

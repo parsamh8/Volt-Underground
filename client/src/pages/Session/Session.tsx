@@ -35,7 +35,7 @@ const Session = () => {
       <div className="event-details">
         {/* Event Poster */}
         <div className="event-border"></div>
-
+        <div className="separator"></div>
         {/* Event Description */}
         <div className="event-description">
           <h1>{events[event_id-1].title}</h1>
@@ -50,6 +50,9 @@ const Session = () => {
         <p><strong>Date:</strong> {events[event_id-1].date} </p>
         <p><strong>Time:</strong> {events[event_id-1].time} </p>
         <p><strong>Price:</strong> {events[event_id-1].price}</p>
+        <div className='session-img'>
+          <img src={events[event_id-1].posterUrl} alt='image of the event' />
+        </div>
         <button className="session-ticket-button" onClick={() => addTicket(event_id)}>
           Add Ticket to Cart
         </button>

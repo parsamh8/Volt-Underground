@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import SingleThought from './pages/SingleThought';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile/Profile.js';
 import ErrorPage from './pages/Error';
 import Cart from './pages/Cart/Cart.js';
 import Session from './pages/Session/Session.js';

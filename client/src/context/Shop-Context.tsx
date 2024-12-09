@@ -121,9 +121,10 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   };
 
   const checkout = () => {
-    const newCart = {"1":0,"2":0,"3":0,"4":0,"5":0}
+    const newCart = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0} // refine to more scalable solution so we can add many more events without updating
     setCartItems(newCart);
     localStorage.setItem("cartItems", JSON.stringify(newCart));
+    return newCart;
   };
 
   const contextValue: ShopContextValue = {

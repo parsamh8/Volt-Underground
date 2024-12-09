@@ -408,7 +408,7 @@ p {
 .p-ft p {
   font-size: 1.0rem;
   margin: 0 0 1rem;
-  line-height: 0.75;
+  line-height: 0.40;
 }
 
 .fr-margin {
@@ -1935,6 +1935,7 @@ body {
   border-radius: 5px;
   text-transform: uppercase;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
 }
 
 .details-button:hover {

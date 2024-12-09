@@ -1,18 +1,18 @@
-// Cart design tutorial used and modified from PedroTech on YouTube
-import { createContext, useState, ReactNode } from "react";
-import { PRODUCTS } from "../Events";
+import { createContext, useState, useEffect, ReactNode } from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_EVENTS } from "../utils/queries";
 
 // Define the type for the product
 interface Product {
-  posterUrl: string,
-  id: number,
-  title: string,
-  price: number,
-  address: string,
-  venue: string,
-  date: string,
-  time: string,
-  ticketLink: string
+  posterUrl: string;
+  id: number;
+  title: string;
+  price: number;
+  address: string;
+  venue: string;
+  date: string;
+  time: string;
+  ticketLink: string;
 }  
 
 // Define the type for the cart
@@ -29,13 +29,13 @@ interface ShopContextValue {
 }
 
 const defaultShopContext: ShopContextValue = {
-    cartItems: {},
-    addToCart: () => {},
-    updateCartItemCount: () => {},
-    removeFromCart: () => {},
-    getTotalCartAmount: () => 0,
-    checkout: () => {},
-  };
+  cartItems: {},
+  addToCart: () => {},
+  updateCartItemCount: () => {},
+  removeFromCart: () => {},
+  getTotalCartAmount: () => 0,
+  checkout: () => {},
+};
 
 // Define the props for the provider
 interface ShopContextProviderProps {
@@ -45,24 +45,31 @@ interface ShopContextProviderProps {
 // Create the context with the appropriate type
 export const ShopContext = createContext<ShopContextValue>(defaultShopContext);
 
-// Function to generate the default cart
-const getDefaultCart = (): Cart => {
-  const cart: Cart = {};
-  for (let i = 1; i <= PRODUCTS.length; i++) {
-    cart[i] = 0;
-  }
-  return cart;
+// Function to generate the default cart from localStorage
+const getCartFromLocalStorage = (): Cart => {
+  const cart = localStorage.getItem("cartItems");
+  return cart ? JSON.parse(cart) : {}; // If cart is in localStorage, parse it; otherwise, return an empty object
 };
 
 // Context provider component
 export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
-  const [cartItems, setCartItems] = useState<Cart>(getDefaultCart());
+  const { data } = useQuery(QUERY_EVENTS);
+  const events = data?.events || [];
 
+  const [cartItems, setCartItems] = useState<Cart>(getCartFromLocalStorage());
+
+  useEffect(() => {
+    if (Object.keys(cartItems).length > 0) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
+
+  // Get total cart amount
   const getTotalCartAmount = (): number => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        const itemInfo = PRODUCTS.find((product: Product) => product.id === Number(item));
+        const itemInfo = events.find((product: Product) => product.id === Number(item));
         if (itemInfo) {
           totalAmount += cartItems[item] * itemInfo.price;
         }
@@ -72,19 +79,33 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   };
 
   const addToCart = (itemId: number) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+    setCartItems((prev) => {
+      const newCart = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
+      localStorage.setItem("cartItems", JSON.stringify(newCart));
+      return newCart;
+    });
   };
 
   const removeFromCart = (itemId: number) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    setCartItems((prev) => {
+      const newCart = { ...prev, [itemId]: Math.max((prev[itemId] || 0) - 1, 0) };
+      localStorage.setItem("cartItems", JSON.stringify(newCart));
+      return newCart;
+    });
   };
 
   const updateCartItemCount = (newAmount: number, itemId: number) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
+    setCartItems((prev) => {
+      const newCart = { ...prev, [itemId]: newAmount };
+      localStorage.setItem("cartItems", JSON.stringify(newCart)); // Persist the updated cart to localStorage
+      return newCart;
+    });
   };
 
   const checkout = () => {
-    setCartItems(getDefaultCart());
+    const newCart = {"1":0,"2":0,"3":0,"4":0,"5":0}
+    setCartItems(newCart);
+    localStorage.setItem("cartItems", JSON.stringify(newCart));
   };
 
   const contextValue: ShopContextValue = {

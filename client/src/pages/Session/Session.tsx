@@ -17,7 +17,6 @@ const Session = () => {
   if (!shopContext) {
     throw new Error('ShopContext is not provided.');
   }
-
   const { addToCart } = shopContext;
 
   useEffect(() => {

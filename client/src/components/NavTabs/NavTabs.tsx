@@ -36,14 +36,14 @@ function NavTabs() {
   }, []);
 
   return (
-    <nav className="navbar navbar-light bg-light bg-light-nav custom-dark-green">
+    <nav className="navbar navbar-light bg-light bg-light-nav">
       <div className="d-flex justify-content-between w-100">
         {!isMenuOpen && (
           <button
             className="navbar-toggler"
             type="button"
             aria-label="Toggle navigation"
-            onClick={toggleMenu} // Attach toggle menu to navbar toggler button
+            onClick={toggleMenu}
           >
             <img
               className="navbar-button-icon"
@@ -58,6 +58,7 @@ function NavTabs() {
         id="navbarNav"
         ref={menuRef} // Attach the ref here
       >
+        <div className='navbar-header'>
         <button
           className="close-button"
           type="button"
@@ -66,7 +67,9 @@ function NavTabs() {
         >
           ×
         </button>
+        </div>
         {/* Return navbar links with client-side routing */}
+        <div>
         <ul className="nav flex-column">
           <NavLink className="nav-item" to="/">
             <li className="nav-link">Home</li>
@@ -98,7 +101,12 @@ function NavTabs() {
             </>
           )}
         </ul>
+        </div>
       </div>
+      <div
+        className={`overlay ${isMenuOpen ? "visible" : ""}`}
+        onClick={toggleMenu}
+      ></div>
     </nav>
   );
 }

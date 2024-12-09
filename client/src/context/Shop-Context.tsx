@@ -82,6 +82,7 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
     }
   }, [cartItems]);
 
+  // Get total cart amount
   const getTotalCartAmount = (): number => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -96,20 +97,33 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   };
 
   const addToCart = (itemId: number) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
+    setCartItems((prev) => {
+      const newCart = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
+      localStorage.setItem("cartItems", JSON.stringify(newCart));
+      return newCart;
+    });
   };
 
   const removeFromCart = (itemId: number) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: Math.max((prev[itemId] || 0) - 1, 0) }));
+    setCartItems((prev) => {
+      const newCart = { ...prev, [itemId]: Math.max((prev[itemId] || 0) - 1, 0) };
+      localStorage.setItem("cartItems", JSON.stringify(newCart));
+      return newCart;
+    });
   };
 
   const updateCartItemCount = (newAmount: number, itemId: number) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
+    setCartItems((prev) => {
+      const newCart = { ...prev, [itemId]: newAmount };
+      localStorage.setItem("cartItems", JSON.stringify(newCart)); // Persist the updated cart to localStorage
+      return newCart;
+    });
   };
 
   const checkout = () => {
-    setCartItems(getDefaultCart(events)); // Reset cart after checkout
-    localStorage.removeItem("cartItems"); // Remove cart from localStorage
+    const newCart = {"1":0,"2":0,"3":0,"4":0,"5":0}
+    setCartItems(newCart);
+    localStorage.setItem("cartItems", JSON.stringify(newCart));
   };
 
   const contextValue: ShopContextValue = {

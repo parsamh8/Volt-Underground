@@ -2,7 +2,7 @@
     {
       
       "id": 1,
-      "posterUrl": "https://picsum.photos/id/237/200/300",
+      "posterUrl": "/src/assets/event1.png",
       "title": "Subterranean Bass",
       "description": "Secretsundaze coming back again this January",
       "price": 30.0,
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "posterUrl": "https://picsum.photos/id/236/200/300",
+      "posterUrl": "/src/assets/event2.png",
       "title": "Gothic Groove Night",
       "description": "Secretsundaze coming back again this February",
       "price": 25.0,
@@ -26,7 +26,7 @@
     },
     {
       "id": 3,
-      "posterUrl": "https://picsum.photos/id/235/200/300",
+      "posterUrl": "/src/assets/event3.png",
       "title": "Moonlight Jazz Jam",
       "description": "Secretsundaze coming back again this March",
       "price": 40.0,
@@ -38,7 +38,7 @@
     },
     {
       "id": 4,
-      "posterUrl": "https://picsum.photos/id/234/200/300",
+      "posterUrl": "/src/assets/event4.png",
       "title": "Punk After Dark",
       "description": "Secretsundaze coming back again this April",
       "price": 20.0,
@@ -50,7 +50,7 @@
     },
     {
       "id": 5,
-      "posterUrl": "https://picsum.photos/id/233/200/300",
+      "posterUrl": "/src/assets/event5.png",
       "title": "Indie Underground Sessions",
       "description": "Secretsundaze coming back again this June",
       "price": 35.0,
@@ -62,7 +62,7 @@
     },
     {
         "id": 6,
-        "posterUrl": "https://picsum.photos/id/231/200/300",
+        "posterUrl": "/src/assets/event6.png",
         "title": "Dumpster Fire",
         "description": "Secretsundaze coming back again this July",
         "price": 35.0,

@@ -57,10 +57,10 @@ const Home = () => {
                   "https://via.placeholder.com/600x400"
                 }
                 alt={featuredEvent || "Featured Event"}
-                className="event-image"
+                className="featured-event-image"
               />
             </div>
-            <div className="event-details p-ft">
+            <div className="featured-event-details p-ft">
               <h4 className="fr-margin">{featuredEvent.title}</h4>
               <p>Date: {featuredEvent.date}</p>
               <p>Location: {featuredEvent.venue}</p>

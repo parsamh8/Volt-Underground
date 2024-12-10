@@ -23,11 +23,9 @@ export const CartItem: React.FC<CartItemProps> = ({ data }) => {
     posterUrl,
     title,
     price,
-    // address,
     venue,
     date,
     time,
-    // ticketLink,
   } = data;
 
   // Define the ShopContext type

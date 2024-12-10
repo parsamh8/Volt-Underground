@@ -4,36 +4,35 @@ import { NavLink } from "react-router-dom";
 import Auth from "../../utils/auth";
 
 function NavTabs() {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false); // Explicitly type useState
-  const menuRef = useRef<HTMLDivElement | null>(null); // Ref type for a div element
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const logout = (event: any) => {
     event.preventDefault();
-    // Logs the user out by calling the logout method from Auth
     Auth.logout();
   };
 
-  // Toggles the side navbar
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
 
-  // Handles clicks outside the menu
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setIsMenuOpen(false); // Close the menu if the click is outside of it
+      setIsMenuOpen(false);
     }
   };
 
   useEffect(() => {
-    // Add event listener for clicks
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Remove event listener on unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Function to close the menu on nav item click
+  const closeMenuAndNavigate = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav className="navbar navbar-light bg-light bg-light-nav">
@@ -56,51 +55,71 @@ function NavTabs() {
       <div
         className={`navbar-collapse ${isMenuOpen ? "show" : ""}`}
         id="navbarNav"
-        ref={menuRef} // Attach the ref here
+        ref={menuRef}
       >
-        <div className='navbar-header'>
-        <button
-          className="close-button"
-          type="button"
-          aria-label="Close navigation"
-          onClick={toggleMenu} // Toggle menu also is called on close button click
-        >
-          ×
-        </button>
+        <div className="navbar-header">
+          <button
+            className="close-button"
+            type="button"
+            aria-label="Close navigation"
+            onClick={toggleMenu}
+          >
+            ×
+          </button>
         </div>
-        {/* Return navbar links with client-side routing */}
         <div>
-        <ul className="nav flex-column">
-          <NavLink className="nav-item" to="/">
-            <li className="nav-link">Home</li>
-          </NavLink>
+          <ul className="nav flex-column">
+            <NavLink className="nav-item" to="/" onClick={closeMenuAndNavigate}>
+              <li className="nav-link">Home</li>
+            </NavLink>
 
-          {Auth.loggedIn() ? (
-            <>
-              <NavLink className="nav-item" to="/me">
-                {/* Retrieving the logged-in user's profile to display the username */}
-                <div className="nav-link">View Profile</div>
-              </NavLink>
-              <NavLink className="nav-item" to="/cart">
-                <li className="nav-link">Cart</li>
-              </NavLink>
-              <div className="nav-item">
-                <button className="nav-link" onClick={logout}>
-                  Logout
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <NavLink className="nav-item" to="/signup">
-                <li className="nav-link">Sign Up</li>
-              </NavLink>
-              <NavLink className="nav-item" to="/login">
-                <li className="nav-link">Login</li>
-              </NavLink>
-            </>
-          )}
-        </ul>
+            {Auth.loggedIn() ? (
+              <>
+                <NavLink
+                  className="nav-item"
+                  to="/me"
+                  onClick={closeMenuAndNavigate}
+                >
+                  <div className="nav-link">View Profile</div>
+                </NavLink>
+                <NavLink
+                  className="nav-item"
+                  to="/cart"
+                  onClick={closeMenuAndNavigate}
+                >
+                  <li className="nav-link">Cart</li>
+                </NavLink>
+                <div className="nav-item">
+                  <button
+                    className="nav-link"
+                    onClick={(e) => {
+                      logout(e);
+                      closeMenuAndNavigate();
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  className="nav-item"
+                  to="/signup"
+                  onClick={closeMenuAndNavigate}
+                >
+                  <li className="nav-link">Sign Up</li>
+                </NavLink>
+                <NavLink
+                  className="nav-item"
+                  to="/login"
+                  onClick={closeMenuAndNavigate}
+                >
+                  <li className="nav-link">Login</li>
+                </NavLink>
+              </>
+            )}
+          </ul>
         </div>
       </div>
       <div

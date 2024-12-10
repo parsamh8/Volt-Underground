@@ -89,7 +89,10 @@ function NavTabs() {
                 >
                   <li className="nav-link">Cart</li>
                 </NavLink>
-                <div className="nav-item">
+                <div className="nav-item" onClick={(e) => {
+                  logout(e);
+                  closeMenuAndNavigate();
+                }}>
                   <button
                     className="nav-link"
                     onClick={(e) => {

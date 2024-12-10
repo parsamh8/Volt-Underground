@@ -60,7 +60,7 @@ const Home = () => {
                 className="featured-event-image"
               />
             </div>
-            <div className="featured-event-details p-ft">
+            <div className="event-details p-ft">
               <h4 className="fr-margin">{featuredEvent.title}</h4>
               <p>Date: {featuredEvent.date}</p>
               <p>Location: {featuredEvent.venue}</p>
@@ -87,11 +87,13 @@ const Home = () => {
                     alt={`Event ${event.id}`}
                     className="event-image"
                   />
+                  <div className='card-details-margin'>
                   <h3>{event.title || `Event ${event.id}`}</h3>
-                  <p>Date: {event.date || "TBD"}</p>
+                  <p id="yellow">Date: {event.date || "TBD"}</p>
                   <Link to={`/session/${event.id}`}>
                     <button className="details-button">Details</button>
                   </Link>
+                  </div>
                 </div>
               ))
             ) : (
@@ -114,11 +116,13 @@ const Home = () => {
                     alt={`Event ${event.id}`}
                     className="event-image"
                   />
+                  <div className='card-details-margin'>
                   <h3>{event.title || `Event ${event.id}`}</h3>
-                  <p>Date: {event.date || "TBD"}</p>
+                  <p id="yellow">Date: {event.date || "TBD"}</p>
                   <Link to={`/session/${event.id}`}>
                     <button className="details-button">Details</button>
                   </Link>
+                  </div>
                 </div>
               ))
             ) : (

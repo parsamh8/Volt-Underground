@@ -60,7 +60,7 @@ export const CartItem: React.FC<CartItemProps> = ({ data }) => {
         <span className="font-semibold text-white text-xl">
           ${price * cartItems[id]}
         </span>
-        <span className="font-semibold text-white text-sm">.00</span>
+        <span className="font-semibold text-white text-xl">.00</span>
         <div className="flex items-center mt-2">
           {/* Decrement Button */}
           <button

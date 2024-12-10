@@ -4,7 +4,12 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    purchaseHistory: [Purchase]!
+  }
+
+  type Purchase {
+    id: ID!
+    event: Event
   }
   
   type Event {
@@ -77,6 +82,7 @@ const typeDefs = `
     time: String,
     ticketLink: String
   ): Event
+    updatePurchaseHistory(purchasedEventIds: [Int]): User 
   }
 `;
 

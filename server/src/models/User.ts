@@ -1,5 +1,10 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, Types, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
+
+interface IPurchase extends Document {
+  id: Schema.Types.ObjectId,
+  event: number
+}
 
 // Define an interface for the User document
 interface IUser extends Document {
@@ -7,8 +12,19 @@ interface IUser extends Document {
   email: string;
   password: string;
   thoughts: Schema.Types.ObjectId[];
+  purchaseHistory: IPurchase[];
   isCorrectPassword(password: string): Promise<boolean>;
 }
+
+const purchaseSchema = new Schema<IPurchase>({
+  id: {
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId()
+  },
+  event: {
+    type: Number
+  }
+});
 
 // Define the schema for the User document
 const userSchema = new Schema<IUser>(
@@ -30,12 +46,7 @@ const userSchema = new Schema<IUser>(
       required: true,
       minlength: 5,
     },
-    thoughts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Thought',
-      },
-    ],
+    purchaseHistory: [purchaseSchema],
   },
   {
     timestamps: true,

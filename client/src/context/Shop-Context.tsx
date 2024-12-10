@@ -1,6 +1,9 @@
 import { createContext, useState, ReactNode, useEffect } from "react";
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_EVENTS } from '../utils/queries';
+import { UPDATE_PURCHASE_HISTORY } from "../utils/mutations";
+
+const [updatePurchaseHistory] = useMutation(UPDATE_PURCHASE_HISTORY)
 
 // Define the type for the event
 interface Event {
@@ -13,7 +16,7 @@ interface Event {
   date: string;
   time: string;
   ticketLink: string;
-}  
+}
 
 // Define the type for the cart
 type Cart = Record<number, number>;
@@ -30,11 +33,19 @@ interface ShopContextValue {
 
 const defaultShopContext: ShopContextValue = {
   cartItems: {},
-  addToCart: () => {},
-  updateCartItemCount: () => {},
-  removeFromCart: () => {},
+  addToCart: () => { },
+  updateCartItemCount: () => { },
+  removeFromCart: () => { },
   getTotalCartAmount: () => 0,
-  checkout: () => {},
+  checkout: () => {
+    // onCheckout update the user history with purchased event Ids
+    updatePurchaseHistory({
+      variables: {
+        purchasedEventIds: Object.keys(defaultShopContext.cartItems).map(Number),
+      },
+    })
+
+  },
 };
 
 // Define the props for the provider
@@ -121,7 +132,7 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   };
 
   const checkout = () => {
-    const newCart = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0} // refine to more scalable solution so we can add many more events without updating
+    const newCart = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0 } // refine to more scalable solution so we can add many more events without updating
     setCartItems(newCart);
     localStorage.setItem("cartItems", JSON.stringify(newCart));
     return newCart;

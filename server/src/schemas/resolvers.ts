@@ -1,9 +1,9 @@
 import { Thought, User, Event } from '../models/index.js';
-import { signToken, AuthenticationError } from '../utils/auth.js'; 
+import { signToken, AuthenticationError } from '../utils/auth.js';
 
 // Define types for the arguments
 interface AddUserArgs {
-  input:{
+  input: {
     username: string;
     email: string;
     password: string;
@@ -24,7 +24,7 @@ interface ThoughtArgs {
 }
 
 interface AddThoughtArgs {
-  input:{
+  input: {
     thoughtText: string;
     thoughtAuthor: string;
   }
@@ -59,7 +59,17 @@ const resolvers = {
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.findOne({ _id: context.user._id })
+          // .populate('thoughts')
+          .populate({
+            path: "purchaseHistory",
+            populate: {
+              path: "event",
+              model: "Event",
+              foreignField: "id"
+            }
+          })
+          ;
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
@@ -74,40 +84,40 @@ const resolvers = {
         throw new Error('Unable to fetch events');
       }
     }
-    
+
   },
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {
       // Create a new user with the provided username, email, and password
       const user = await User.create({ ...input });
-    
+
       // Sign a token with the user's information
       const token = signToken(user.username, user.email, user._id);
-    
+
       // Return the token and the user
       return { token, user };
     },
-    
+
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
       // Find a user with the provided email
       const user = await User.findOne({ email });
-    
+
       // If no user is found, throw an AuthenticationError
       if (!user) {
         throw new AuthenticationError('Could not authenticate user.');
       }
-    
+
       // Check if the provided password is correct
       const correctPw = await user.isCorrectPassword(password);
-    
+
       // If the password is incorrect, throw an AuthenticationError
       if (!correctPw) {
         throw new AuthenticationError('Could not authenticate user.');
       }
-    
+
       // Sign a token with the user's information
       const token = signToken(user.username, user.email, user._id);
-    
+
       // Return the token and the user
       return { token, user };
     },
@@ -149,7 +159,7 @@ const resolvers = {
           thoughtAuthor: context.user.username,
         });
 
-        if(!thought){
+        if (!thought) {
           throw AuthenticationError;
         }
 
@@ -179,21 +189,59 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    createEvent: async (_parent:any, { id, posterUrl, title, description, price, address, venue, date, time, ticketLink }:any) => {
+    createEvent: async (_parent: any, { id, posterUrl, title, description, price, address, venue, date, time, ticketLink }: any) => {
       const newEvent = new Event({
         id,
-        posterUrl, 
+        posterUrl,
         title,
         description,
-        price, 
-        address, 
-        venue, 
-        date, 
-        time, 
+        price,
+        address,
+        venue,
+        date,
+        time,
         ticketLink
       });
       await newEvent.save();
       return newEvent;
+    },
+
+    // updatePurchaseHistory: async(_parent: any, { userId, purchases, action }: {userId: string, purchases: Array<{purchaseId: number, quantity: number}>, action:string},
+    //   context: any) => {
+
+    //   }
+    updatePurchaseHistory: async (_parent: any, { purchasedEventIds }: { purchasedEventIds: [number] }, context: any) => {
+      if (context.user) {
+
+        const purchasedItems = purchasedEventIds.map(eventId => {
+          return {
+            event: eventId
+          }
+        })
+
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: {
+              purchaseHistory: {
+                $each: purchasedItems
+              }
+            }
+          },
+          { new: true }
+        )
+          .populate({
+            path: "purchaseHistory",
+            populate: {
+              path: "event",
+              model: "Event",
+              foreignField: "id"
+            }
+          })
+
+          ;
+      }
+      throw AuthenticationError;
     }
   },
 };

@@ -205,6 +205,7 @@ const resolvers = {
       await newEvent.save();
       return newEvent;
     },
+<<<<<<< HEAD
 
     // updatePurchaseHistory: async(_parent: any, { userId, purchases, action }: {userId: string, purchases: Array<{purchaseId: number, quantity: number}>, action:string},
     //   context: any) => {
@@ -240,6 +241,19 @@ const resolvers = {
           })
 
           ;
+=======
+    updateUser: async (_parent:any, {newEmail}: {newEmail:string}, context:any ) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+           $set: {
+            email: newEmail
+           }
+          },
+          { new: true }
+        );
+>>>>>>> 33e298d76ed26f4f6749a1a5a6fc29f7efc4a464
       }
       throw AuthenticationError;
     }

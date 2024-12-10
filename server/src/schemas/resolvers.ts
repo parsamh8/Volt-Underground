@@ -194,6 +194,20 @@ const resolvers = {
       });
       await newEvent.save();
       return newEvent;
+    },
+    updateUser: async (_parent:any, {newEmail}: {newEmail:string}, context:any ) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+           $set: {
+            email: newEmail
+           }
+          },
+          { new: true }
+        );
+      }
+      throw AuthenticationError;
     }
   },
 };

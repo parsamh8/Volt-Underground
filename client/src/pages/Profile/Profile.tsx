@@ -1,6 +1,8 @@
 import { Navigate, useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import "./Profile.css";
+import { useState, type FormEvent, type ChangeEvent } from "react";
+import { UPDATE_USER } from "../../utils/mutations";
 
 // Queries
 import { QUERY_USER, QUERY_ME } from "../../utils/queries";
@@ -34,6 +36,15 @@ const PurchaseHistoryCard: React.FC<PurchaseHistoryCardProps> = ({
 );
 
 const Profile = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [updateUser] = useMutation(UPDATE_USER, {
+    refetchQueries: [QUERY_ME],
+  });
+
+  const [formState, setFormState] = useState({
+    email: "",
+  });
+
   const { username: userParam } = useParams();
 
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -65,23 +76,57 @@ const Profile = () => {
       event: "Underground Beats",
       date: "Dec 15, 2024",
       location: "The Hidden Venue",
-      
     },
     {
       ticketId: "12346",
       event: "Bassline Madness",
       date: "Jan 10, 2025",
       location: "Subterranean Club",
-      
     },
     {
       ticketId: "12347",
       event: "Gothic Groove Night",
       date: "Feb 20, 2025",
       location: "Warehouse 99",
-      
     },
   ];
+  const handleClosePopup = (event: any) => {
+    event.stopPropagation();
+    const clickElement = event.target.id;
+    console.log(clickElement);
+    if (clickElement === "modalContainer") {
+      setShowPopup(false);
+    }
+  };
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const handleFormSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+
+    try {
+      console.log(formState.email);
+      const { data } = await updateUser({
+        variables: { newEmail: formState.email },
+      });
+      console.log(data);
+      if (data.updateUser) {
+        setShowPopup(false);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <main className="profile-page">
@@ -141,6 +186,10 @@ const Profile = () => {
               <h3 className="text-4xl font-semibold leading-normal mb-2 text-white">
                 {user.username}
               </h3>
+              <h4 className="mb-4">{user.email}</h4>
+              <button className="text-xl card-button" onClick={handleOpenPopup}>
+                Update Email
+              </button>
             </div>
             <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
               <div className="flex flex-wrap justify-center">
@@ -169,6 +218,36 @@ const Profile = () => {
           </div>
         </div>
       </section>
+      {showPopup && (
+        <div
+          id="modalContainer"
+          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+          onClick={handleClosePopup}
+        >
+          <div className="bg-zinc-900 p-5 rounded-lg text-center">
+            <h2 className="text-lg font-bold">Current Email: {user.email}</h2>
+            <div className="flex items-center space-x-4">
+              <label htmlFor="email" className="text-lg font-medium text-white whitespace-nowrap">
+                New Email:
+              </label>
+              <input
+                placeholder="Updated email address"
+                name="email"
+                type="email"
+                value={formState.email}
+                onChange={handleChange}
+                className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+              />
+            </div>
+            <button
+              className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg"
+              onClick={handleFormSubmit}
+            >
+              CONFIRM
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 };

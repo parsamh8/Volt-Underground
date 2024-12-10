@@ -67,16 +67,19 @@ const typeDefs = `
     removeThought(thoughtId: ID!): Thought
     removeComment(thoughtId: ID!, commentId: ID!): Thought
     createEvent(
-    posterUrl: String,
-    title: String,
-    description: String,
-    price: Float,
-    address: String,
-    venue: String,
-    date: String,
-    time: String,
-    ticketLink: String
-  ): Event
+      posterUrl: String,
+      title: String,
+      description: String,
+      price: Float,
+      address: String,
+      venue: String,
+      date: String,
+      time: String,
+      ticketLink: String
+    ): Event
+    updateUser(
+      newEmail: String
+    ): User
   }
 `;
 

@@ -23,11 +23,11 @@ export const CartItem: React.FC<CartItemProps> = ({ data }) => {
     posterUrl,
     title,
     price,
-    address,
+    // address,
     venue,
     date,
     time,
-    ticketLink,
+    // ticketLink,
   } = data;
 
   // Define the ShopContext type
@@ -62,7 +62,7 @@ export const CartItem: React.FC<CartItemProps> = ({ data }) => {
         <span className="font-semibold text-white text-xl">
           ${price * cartItems[id]}
         </span>
-        <span className="font-semibold text-white text-sm">.00</span>
+        <span className="font-semibold text-white text-xl">.00</span>
         <div className="flex items-center mt-2">
           {/* Decrement Button */}
           <button

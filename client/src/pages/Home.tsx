@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { ShopContext } from "../context/Shop-Context";
-import { useContext } from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_EVENTS } from '../utils/queries';
+import { useContext } from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_EVENTS } from "../utils/queries";
+import { useRef } from "react";
 
 const Home = () => {
   const { loading: _eventsLoading, data } = useQuery(QUERY_EVENTS);
@@ -11,13 +12,22 @@ const Home = () => {
   const featuredEvent = events[0];
 
   const shopContext = useContext(ShopContext);
+
+  const upcomingEventsRef = useRef<any>(null);
+  
   if (!shopContext) {
-    throw new Error("ShopContext is not provided.")
+    throw new Error("ShopContext is not provided.");
   }
 
   if (_eventsLoading) {
     return <div>Loading...</div>; // You can customize the loading state here
   }
+
+  const handleExploreEventsClick = () => {
+    if (upcomingEventsRef.current) {
+      upcomingEventsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <main>
@@ -26,8 +36,13 @@ const Home = () => {
         <div className="hero-section">
           <div className="hero-content">
             <h1>Present Underground Sessions</h1>
-            <p>Where beats meet the night. Discover the ultimate techno-house experience.</p>
-            <button className="cta-button">Explore Events</button>
+            <p>
+              Where beats meet the night. Discover the ultimate techno-house
+              experience.
+            </p>
+            <button className="cta-button" onClick={handleExploreEventsClick}>
+              Explore Events
+            </button>
           </div>
         </div>
 
@@ -37,33 +52,38 @@ const Home = () => {
           <div className="event-container">
             <div className="event-image-wrapper">
               <img
-                src={featuredEvent.posterUrl || "https://via.placeholder.com/600x400"}
+                src={
+                  featuredEvent.posterUrl ||
+                  "https://via.placeholder.com/600x400"
+                }
                 alt={featuredEvent || "Featured Event"}
                 className="event-image"
               />
             </div>
             <div className="event-details p-ft">
-              <h4 className='fr-margin'>{featuredEvent.title}</h4>
+              <h4 className="fr-margin">{featuredEvent.title}</h4>
               <p>Date: {featuredEvent.date}</p>
               <p>Location: {featuredEvent.venue}</p>
               <p>Price: {featuredEvent.price}</p>
               {/* <p>Ticket Link: {featuredEvent.ticketLink}</p> */}
               <Link to={`/session/${events[0].id}`}>
-                    <button className="details-button">Details</button>
+                <button className="details-button">Details</button>
               </Link>
             </div>
           </div>
         </section>
 
         {/* Upcoming Events Section */}
-        <section className="upcoming-events">
+        <section className="upcoming-events" ref={upcomingEventsRef}>
           <h2>Upcoming Events</h2>
           <div className="events-grid">
             {events.length > 0 ? (
-              events.slice(0, 3).map((event:any, index:any) => (
+              events.slice(0, 3).map((event: any, index: any) => (
                 <div key={index} className="event-card">
                   <img
-                    src={event.posterUrl || "https://via.placeholder.com/300x200"} // Add fallback if ticketLink is missing
+                    src={
+                      event.posterUrl || "https://via.placeholder.com/300x200"
+                    } // Add fallback if ticketLink is missing
                     alt={`Event ${event.id}`}
                     className="event-image"
                   />
@@ -85,10 +105,12 @@ const Home = () => {
           <h2>Past Events</h2>
           <div className="events-grid">
             {events.length > 0 ? (
-              events.slice(3, 6).map((event:any, index:any) => (
+              events.slice(3, 6).map((event: any, index: any) => (
                 <div key={index} className="event-card">
                   <img
-                    src={event.posterUrl || "https://via.placeholder.com/300x200"} // Add fallback
+                    src={
+                      event.posterUrl || "https://via.placeholder.com/300x200"
+                    } // Add fallback
                     alt={`Event ${event.id}`}
                     className="event-image"
                   />
@@ -104,7 +126,6 @@ const Home = () => {
             )}
           </div>
         </section>
-
       </div>
     </main>
   );

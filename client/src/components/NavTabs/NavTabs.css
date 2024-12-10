@@ -119,6 +119,7 @@ nav ul {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  cursor: pointer;
 }
 
 .nav-link {

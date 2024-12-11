@@ -5,7 +5,7 @@ import "./Header.css";
 const Header = () => {
   return (
     <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
-      <div className="container flex-row justify-space-between-lg justify-center align-center">
+      <div className="container flex-row justify-space-between-lg justify-center align-center panddaaaaaaaa">
         <div className='header-item-1'>
           <Link className="text-light" to="/">
             <img className='logo-header' src="/logo-dark.png" alt="Description of the image"/>

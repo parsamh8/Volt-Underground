@@ -3,10 +3,16 @@ import { useQuery, useMutation } from "@apollo/client";
 import "./Profile.css";
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { UPDATE_USER } from "../../utils/mutations";
-import background from "../../assets/profile-background.png"
+import background from "../../assets/profile-background.png";
+import { Link } from "react-router-dom";
 
 // Queries
-import { QUERY_USER, QUERY_ME, GET_USER_PURCHASE_HISTORY, QUERY_EVENTS } from "../../utils/queries";
+import {
+  QUERY_USER,
+  QUERY_ME,
+  GET_USER_PURCHASE_HISTORY,
+  QUERY_EVENTS,
+} from "../../utils/queries";
 import Auth from "../../utils/auth";
 
 interface PurchaseHistoryCardProps {
@@ -26,13 +32,14 @@ const PurchaseHistoryCard: React.FC<PurchaseHistoryCardProps> = ({
 }) => (
   <div className="card">
     {/* Conditionally render the image if imageUrl is provided */}
-    {imageUrl && <img src={imageUrl} alt={event} className="card-image" />}
-
+    {imageUrl && <img src={imageUrl} alt={String(event)} className="card-image" />}
     <h5 className="card-title">{`Ticket #${ticketId}`}</h5>
     <p>{`Event: ${event}`}</p>
     <p>{`Date: ${date}`}</p>
     <p>{`Location: ${location}`}</p>
-    <button className="card-button">View Details</button>
+    <Link to={`/session/${ticketId}`}>
+      <button className="details-button">Details</button>
+    </Link>
   </div>
 );
 
@@ -41,7 +48,7 @@ const Profile = () => {
   const [updateUser] = useMutation(UPDATE_USER, {
     refetchQueries: [QUERY_ME],
   });
-  
+
   const { data: pHistory } = useQuery(GET_USER_PURCHASE_HISTORY);
   const { data: eventsData } = useQuery(QUERY_EVENTS);
   const userPHistory = pHistory?.me.purchaseHistory || [];
@@ -122,7 +129,7 @@ const Profile = () => {
       eventName: event?.title || "Unknown Event", // Default if event is not found
       date: event?.date || "Unknown Date", // Default if event is not found
       location: event?.address || "Unknown Location",
-      imageUrl: event?.posterUrl
+      imageUrl: event?.posterUrl,
     };
   });
 
@@ -133,7 +140,7 @@ const Profile = () => {
         <div
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
-            backgroundImage:`url(${background})`,
+            backgroundImage: `url(${background})`,
           }}
         >
           <span
@@ -185,7 +192,7 @@ const Profile = () => {
                 {user.username}
               </h3>
               <h4 className="mb-4">{user.email}</h4>
-              <button className="text-xl card-button" onClick={handleOpenPopup}>
+              <button className="details-button" onClick={handleOpenPopup}>
                 Update Email
               </button>
             </div>
@@ -195,23 +202,22 @@ const Profile = () => {
                   <p className="mb-4 text-2xl leading-relaxed text-white">
                     PURCHASE HISTORY
                   </p>
-                    <div className="card-container">
+                  <div className="card-container profile-page-card-container">
                     {updatedPurchaseHistory.length > 0 ? (
-                        updatedPurchaseHistory.map((purchase: any) => (
-                          <PurchaseHistoryCard
-                            key={purchase.ticketId}
-                            ticketId={purchase.ticketId}
-                            event={purchase.eventName}
-                            date={purchase.date}
-                            location={purchase.location}
-                            imageUrl={purchase.imageUrl}
-                          />
-                        ))
-                      ) : (
-                        <p>No purchase history available.</p>
-                      )}
-                    </div>
-                  
+                      updatedPurchaseHistory.map((purchase: any) => (
+                        <PurchaseHistoryCard
+                          key={purchase.ticketId}
+                          ticketId={purchase.ticketId}
+                          event={purchase.eventName}
+                          date={purchase.date}
+                          location={purchase.location}
+                          imageUrl={purchase.imageUrl}
+                        />
+                      ))
+                    ) : (
+                      <p>No purchase history available.</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -234,7 +240,10 @@ const Profile = () => {
           <div className="bg-zinc-900 p-5 rounded-lg text-center">
             <h2 className="text-lg font-bold">Current Email: {user.email}</h2>
             <div className="flex items-center space-x-4">
-              <label htmlFor="email" className="text-lg font-medium text-white whitespace-nowrap">
+              <label
+                htmlFor="email"
+                className="text-lg font-medium text-white whitespace-nowrap"
+              >
                 New Email:
               </label>
               <input
@@ -246,10 +255,7 @@ const Profile = () => {
                 className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
               />
             </div>
-            <button
-              className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg"
-              onClick={handleFormSubmit}
-            >
+            <button className="deatils-button" onClick={handleFormSubmit}>
               CONFIRM
             </button>
           </div>

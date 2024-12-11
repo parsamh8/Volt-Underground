@@ -44,3 +44,12 @@
     margin-bottom: 10px; /* Slightly smaller margin */
   }
   
+  .profile-page-card-container .card-image {
+    width: 100%; /* Ensures the image fills the width of its container */
+    max-width: 400px; /* Restricts the maximum width */
+    height: 300px; /* Uniform height */
+    object-fit: contain; /* Crops the image to fit while preserving the aspect ratio */
+    border-radius: 5px; /* Optional for rounded corners */
+    background-color: black;
+  }
+  

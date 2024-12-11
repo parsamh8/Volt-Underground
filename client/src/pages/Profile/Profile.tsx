@@ -3,7 +3,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import "./Profile.css";
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { UPDATE_USER } from "../../utils/mutations";
-import background from "../../assets/profile-background.png"
+import background from "/profile-background.png";
 
 // Queries
 import { QUERY_USER, QUERY_ME, GET_USER_PURCHASE_HISTORY, QUERY_EVENTS } from "../../utils/queries";
@@ -41,10 +41,10 @@ const Profile = () => {
   const [updateUser] = useMutation(UPDATE_USER, {
     refetchQueries: [QUERY_ME],
   });
-  
+
   const { data: pHistory } = useQuery(GET_USER_PURCHASE_HISTORY);
   const { data: eventsData } = useQuery(QUERY_EVENTS);
-  const userPHistory = pHistory?.me.purchaseHistory || [];
+  const userPHistory = pHistory?.me?.purchaseHistory || [];
   const events = eventsData?.events || [];
 
   const [formState, setFormState] = useState({
@@ -58,6 +58,7 @@ const Profile = () => {
   });
 
   const user = data?.me || data?.user || {};
+  console.log(pHistory);
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
@@ -133,7 +134,7 @@ const Profile = () => {
         <div
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
-            backgroundImage:`url(${background})`,
+            backgroundImage: `url(${background})`,
           }}
         >
           <span
@@ -167,7 +168,7 @@ const Profile = () => {
                   <div className="relative">
                     <img
                       alt="Profile"
-                      src="/src/assets/logo-dark.png"
+                      src="/logo-dark.png"
                       className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                     />
                   </div>
@@ -195,23 +196,23 @@ const Profile = () => {
                   <p className="mb-4 text-2xl leading-relaxed text-white">
                     PURCHASE HISTORY
                   </p>
-                    <div className="card-container">
+                  <div className="card-container">
                     {updatedPurchaseHistory.length > 0 ? (
-                        updatedPurchaseHistory.map((purchase: any) => (
-                          <PurchaseHistoryCard
-                            key={purchase.ticketId}
-                            ticketId={purchase.ticketId}
-                            event={purchase.eventName}
-                            date={purchase.date}
-                            location={purchase.location}
-                            imageUrl={purchase.imageUrl}
-                          />
-                        ))
-                      ) : (
-                        <p>No purchase history available.</p>
-                      )}
-                    </div>
-                  
+                      updatedPurchaseHistory.map((purchase: any) => (
+                        <PurchaseHistoryCard
+                          key={purchase.ticketId}
+                          ticketId={purchase.ticketId}
+                          event={purchase.eventName}
+                          date={purchase.date}
+                          location={purchase.location}
+                          imageUrl={purchase.imageUrl}
+                        />
+                      ))
+                    ) : (
+                      <p>No purchase history available.</p>
+                    )}
+                  </div>
+
                 </div>
               </div>
             </div>

@@ -36,3 +36,14 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const GET_USER_PURCHASE_HISTORY = gql`
+  query getUserPurchaseHistory {
+    me {
+      purchaseHistory {
+        eventId
+        quantity
+      }
+    }
+  }
+`;

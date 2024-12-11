@@ -8,7 +8,7 @@ const Header = () => {
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div className='header-item-1'>
           <Link className="text-light" to="/">
-            <img className='logo-header' src="/public/logo-dark.png" alt="Description of the image"/>
+            <img className='logo-header' src="/logo-dark.png" alt="Description of the image"/>
           </Link>
           {/* <p className="m-0 slogan blinking-text">More Than Underground, It's a Movement.</p> */}
           </div>

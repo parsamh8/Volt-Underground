@@ -18,7 +18,7 @@
 <div align="center">
   <a href="https://github.com/404pandas/project-2-setup-guide">
   <!-- TODO: Correct this file path to a logo if you would like one; otherwise, delete this a href -->
-    <img src="./client/src/assets/logo-dark.png" alt="Logo" width="150" height="150">
+    <img src="./client/public/logo-light.png" alt="Logo" width="150" height="150">
   </a>
 
 <!-- TODO: Edit App name -->

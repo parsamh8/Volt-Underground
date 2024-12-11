@@ -1745,7 +1745,7 @@ body {
   color: #fff;
   border-radius: 10px;
   margin-bottom: 50px;
-  background-image: url("/src/assets/hero.gif");
+  background-image: url("/hero.gif");
 }
 
 .hero-section h1 {

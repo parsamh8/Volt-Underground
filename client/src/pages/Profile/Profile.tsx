@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import "./Profile.css";
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { UPDATE_USER } from "../../utils/mutations";
+import background from "../../assets/profile-background.png"
 
 // Queries
 import { QUERY_USER, QUERY_ME, GET_USER_PURCHASE_HISTORY, QUERY_EVENTS } from "../../utils/queries";
@@ -132,8 +133,7 @@ const Profile = () => {
         <div
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&auto=format&fit=crop&w=2710&q=80')",
+            backgroundImage:`url(${background})`,
           }}
         >
           <span

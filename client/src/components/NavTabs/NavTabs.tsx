@@ -46,7 +46,7 @@ function NavTabs() {
           >
             <img
               className="navbar-button-icon"
-              src="https://img.icons8.com/?size=100&id=120374&format=png&color=FFFFFF"
+              src="https://img.icons8.com/?size=100&id=i6goVGFvFHG0&format=png&color=000000"
               alt="Toggle Menu"
             />
           </button>
@@ -67,7 +67,7 @@ function NavTabs() {
             ×
           </button>
         </div>
-        <div>
+        <div id="ubuntu-font">
           <ul className="nav flex-column">
             <NavLink className="nav-item" to="/" onClick={closeMenuAndNavigate}>
               <li className="nav-link">Home</li>

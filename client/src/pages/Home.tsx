@@ -35,8 +35,8 @@ const Home = () => {
         {/* Hero Section */}
         <div className="hero-section">
           <div className="hero-content">
-            <h1>Present Underground Sessions</h1>
-            <p>
+            <h1 id="yuji-font">Present Underground Sessions</h1>
+            <p id="gruppo">
               Where beats meet the night. Discover the ultimate techno-house
               experience.
             </p>

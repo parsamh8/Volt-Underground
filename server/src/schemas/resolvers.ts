@@ -1,4 +1,4 @@
-import { Thought, User, Event } from '../models/index.js';
+import { User, Event } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js';
 
 // Define types for the arguments
@@ -19,57 +19,20 @@ interface UserArgs {
   username: string;
 }
 
-interface ThoughtArgs {
-  thoughtId: string;
-}
-
-interface AddThoughtArgs {
-  input: {
-    thoughtText: string;
-    thoughtAuthor: string;
-  }
-}
-
-interface AddCommentArgs {
-  thoughtId: string;
-  commentText: string;
-}
-
-interface RemoveCommentArgs {
-  thoughtId: string;
-  commentId: string;
-}
-
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('thoughts');
+      return User.find();
     },
     user: async (_parent: any, { username }: UserArgs) => {
-      return User.findOne({ username }).populate('thoughts');
-    },
-    thoughts: async () => {
-      return await Thought.find().sort({ createdAt: -1 });
-    },
-    thought: async (_parent: any, { thoughtId }: ThoughtArgs) => {
-      return await Thought.findOne({ _id: thoughtId });
+      return User.findOne({ username });
     },
     // Query to get the authenticated user's information
     // The 'me' query relies on the context to check if the user is authenticated
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-        return User.findOne({ _id: context.user._id })
-          // .populate('thoughts')
-          .populate({
-            path: "purchaseHistory",
-            populate: {
-              path: "event",
-              model: "Event",
-              foreignField: "id"
-            }
-          })
-          ;
+        return User.findOne({ _id: context.user._id });
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
@@ -121,74 +84,6 @@ const resolvers = {
       // Return the token and the user
       return { token, user };
     },
-    addThought: async (_parent: any, { input }: AddThoughtArgs, context: any) => {
-      if (context.user) {
-        const thought = await Thought.create({ ...input });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
-        );
-
-        return thought;
-      }
-      throw AuthenticationError;
-      ('You need to be logged in!');
-    },
-    addComment: async (_parent: any, { thoughtId, commentText }: AddCommentArgs, context: any) => {
-      if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      throw AuthenticationError;
-    },
-    removeThought: async (_parent: any, { thoughtId }: ThoughtArgs, context: any) => {
-      if (context.user) {
-        const thought = await Thought.findOneAndDelete({
-          _id: thoughtId,
-          thoughtAuthor: context.user.username,
-        });
-
-        if (!thought) {
-          throw AuthenticationError;
-        }
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { thoughts: thought._id } }
-        );
-
-        return thought;
-      }
-      throw AuthenticationError;
-    },
-    removeComment: async (_parent: any, { thoughtId, commentId }: RemoveCommentArgs, context: any) => {
-      if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          {
-            $pull: {
-              comments: {
-                _id: commentId,
-                commentAuthor: context.user.username,
-              },
-            },
-          },
-          { new: true }
-        );
-      }
-      throw AuthenticationError;
-    },
     createEvent: async (_parent: any, { id, posterUrl, title, description, price, address, venue, date, time, ticketLink }: any) => {
       const newEvent = new Event({
         id,
@@ -220,36 +115,48 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    updatePurchaseHistory: async (_parent: any, { purchasedEventIds }: { purchasedEventIds: [number] }, context: any): Promise<any> => {
-      if (context.user) {
-
-        const purchasedItems = purchasedEventIds.map(eventId => {
-          return {
-            event: eventId
-          }
-        })
-
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
-          {
-            $addToSet: {
-              purchaseHistory: {
-                $each: purchasedItems
-              }
-            }
-          },
-          { new: true }
-        )
-          .populate({
-            path: "purchaseHistory",
-            populate: {
-              path: "event",
-              model: "Event",
-              foreignField: "id"
-            }
-          })
-        }
+    updatePurchaseHistory: async (_parent: any, { purchasedItems }: { purchasedItems: { eventId: number; quantity: number }[] }, context: any): Promise<any> => {
+      if (!context.user) {
+        throw new Error("User not authenticated");
       }
-    }
-  }
+      try {
+        const user = await User.findById(context.user._id);
+
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        for (const { eventId, quantity } of purchasedItems) {
+          // Try to find an existing purchase in the user's purchase history
+          const existingPurchase = await User.findOne({
+            _id: user._id,
+            "purchaseHistory.eventId": eventId
+          });
+    
+          if (existingPurchase) {
+            // If the purchase exists, update the quantity
+            await User.updateOne(
+              { _id: user._id, "purchaseHistory.eventId": eventId },
+              { $inc: { "purchaseHistory.$.quantity": quantity } }
+            );
+          } else {
+            // If the purchase doesn't exist, add it as a new entry
+            await User.findOneAndUpdate(
+              { _id: user._id },
+              {
+                $addToSet: {
+                  purchaseHistory: { eventId, quantity }
+                }
+              },
+              { new: true }
+            );
+          }
+        }
+        return User.findById(user._id); // Return the updated user object
+      } catch (error:any) {
+        throw new Error("Error updating purchase history: " + error.message);
+      }
+    },
+  },
+};
 export default resolvers

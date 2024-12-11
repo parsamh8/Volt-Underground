@@ -24,52 +24,6 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_EVENT = gql`
-  mutation AddThought($input: ThoughtInput!) {
-    addThought(input: $input) {
-      _id
-      thoughtText
-      thoughtAuthor
-      creaetedAt
-      comments {
-        _id
-        commentText
-      }
-    }
-  }
-`;
-
-export const ADD_THOUGHT = gql`
-  mutation AddThought($input: ThoughtInput!) {
-    addThought(input: $input) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
-    }
-  }
-`;
-
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
-    }
-  }
-`;
-
 export const UPDATE_USER = gql`
   mutation UpdateUser($newEmail: String) {
     updateUser(newEmail: $newEmail) {
@@ -80,25 +34,14 @@ export const UPDATE_USER = gql`
 
 
 export const UPDATE_PURCHASE_HISTORY = gql`
-  mutation UpdatePurchaseHistory($purchasedEventIds: [Int]) {
-  updatePurchaseHistory(purchasedEventIds: $purchasedEventIds) {
-    _id
-    username
-    purchaseHistory {
-      id
-      event {
-        id
-        title
-        description
-        posterUrl
-        price
-        address
-        date
-        venue
-        time
-        ticketLink
+  mutation UpdatePurchaseHistory($purchasedItems: [PurchaseInput!]!) {
+    updatePurchaseHistory(purchasedItems: $purchasedItems) {
+      _id
+      username
+      purchaseHistory {
+        eventId
+        quantity
       }
     }
   }
-}
 `

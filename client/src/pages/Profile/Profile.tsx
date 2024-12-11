@@ -5,11 +5,11 @@ import { useState, type FormEvent, type ChangeEvent } from "react";
 import { UPDATE_USER } from "../../utils/mutations";
 
 // Queries
-import { QUERY_USER, QUERY_ME } from "../../utils/queries";
+import { QUERY_USER, QUERY_ME, GET_USER_PURCHASE_HISTORY, QUERY_EVENTS } from "../../utils/queries";
 import Auth from "../../utils/auth";
 
 interface PurchaseHistoryCardProps {
-  ticketId: string;
+  ticketId: number;
   event: string;
   date: string;
   location: string;
@@ -21,7 +21,7 @@ const PurchaseHistoryCard: React.FC<PurchaseHistoryCardProps> = ({
   event,
   date,
   location,
-  imageUrl = "https://via.placeholder.com/150",
+  imageUrl,
 }) => (
   <div className="card">
     {/* Conditionally render the image if imageUrl is provided */}
@@ -40,6 +40,11 @@ const Profile = () => {
   const [updateUser] = useMutation(UPDATE_USER, {
     refetchQueries: [QUERY_ME],
   });
+  
+  const { data: pHistory } = useQuery(GET_USER_PURCHASE_HISTORY);
+  const { data: eventsData } = useQuery(QUERY_EVENTS);
+  const userPHistory = pHistory?.me.purchaseHistory || [];
+  const events = eventsData?.events || [];
 
   const [formState, setFormState] = useState({
     email: "",
@@ -70,26 +75,6 @@ const Profile = () => {
     );
   }
 
-  const purchaseHistory = [
-    {
-      ticketId: "12345",
-      event: "Underground Beats",
-      date: "Dec 15, 2024",
-      location: "The Hidden Venue",
-    },
-    {
-      ticketId: "12346",
-      event: "Bassline Madness",
-      date: "Jan 10, 2025",
-      location: "Subterranean Club",
-    },
-    {
-      ticketId: "12347",
-      event: "Gothic Groove Night",
-      date: "Feb 20, 2025",
-      location: "Warehouse 99",
-    },
-  ];
   const handleClosePopup = (event: any) => {
     event.stopPropagation();
     const clickElement = event.target.id;
@@ -127,7 +112,20 @@ const Profile = () => {
       console.error(e);
     }
   };
+  console.log(userPHistory);
 
+  const updatedPurchaseHistory = userPHistory.map((purchase: any) => {
+    const event = events.find((e: any) => e.id === purchase.eventId);
+    return {
+      ticketId: event.id,
+      eventName: event?.title || "Unknown Event", // Default if event is not found
+      date: event?.date || "Unknown Date", // Default if event is not found
+      location: event?.address || "Unknown Location",
+      imageUrl: event?.posterUrl
+    };
+  });
+
+  console.log(updatedPurchaseHistory);
   return (
     <main className="profile-page">
       <section className="relative block h-500-px">
@@ -196,15 +194,24 @@ const Profile = () => {
                 <div className="w-full lg:w-9/12 px-4">
                   <p className="mb-4 text-2xl leading-relaxed text-white">
                     PURCHASE HISTORY
-                    <div className="card-container">
-                      {purchaseHistory.map((purchase) => (
-                        <PurchaseHistoryCard
-                          key={purchase.ticketId}
-                          {...purchase}
-                        />
-                      ))}
-                    </div>
                   </p>
+                    <div className="card-container">
+                    {updatedPurchaseHistory.length > 0 ? (
+                        updatedPurchaseHistory.map((purchase: any) => (
+                          <PurchaseHistoryCard
+                            key={purchase.ticketId}
+                            ticketId={purchase.ticketId}
+                            event={purchase.eventName}
+                            date={purchase.date}
+                            location={purchase.location}
+                            imageUrl={purchase.imageUrl}
+                          />
+                        ))
+                      ) : (
+                        <p>No purchase history available.</p>
+                      )}
+                    </div>
+                  
                 </div>
               </div>
             </div>

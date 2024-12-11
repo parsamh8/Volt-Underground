@@ -33,11 +33,11 @@ interface ShopContextValue {
 
 const defaultShopContext: ShopContextValue = {
   cartItems: {},
-  addToCart: () => {},
-  updateCartItemCount: () => {},
-  removeFromCart: () => {},
+  addToCart: () => { },
+  updateCartItemCount: () => { },
+  removeFromCart: () => { },
   getTotalCartAmount: () => 0,
-  checkout: () => {},
+  checkout: () => { },
 };
 
 // Define the props for the provider
@@ -66,7 +66,7 @@ const getDefaultCart = (events: Event[]): Cart => {
 // Context provider component
 export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   const { data: eventsData } = useQuery(QUERY_EVENTS);
-  const [updatePurchaseHistory] = useMutation(UPDATE_PURCHASE_HISTORY)
+  const [updatePurchaseHistory] = useMutation(UPDATE_PURCHASE_HISTORY);
   const events = eventsData?.events || [];
 
   // Initialize cartItems state from localStorage (if available)
@@ -124,14 +124,32 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
     });
   };
 
-  const checkout = () => {
-    const newCart = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0 } // refine to more scalable solution so we can add many more events without updating
-    events.map((event: any) => {
-      if (cartItems[event.id] !== 0) {
-        updatePurchaseHistory(event.id) }});
-    setCartItems(newCart);
-    localStorage.setItem("cartItems", JSON.stringify(newCart));
-    return newCart;
+  const checkout = async () => {
+    const storedCart = localStorage.getItem("cartItems");
+    const cartItems = storedCart ? JSON.parse(storedCart) : {};
+    
+    const purchasedItems = Object.entries(cartItems as Record<number, number>)
+    .filter(([_, quantity]) => quantity > 0)
+    .map(([eventId, quantity]) => ({ eventId: Number(eventId), quantity }));
+    console.log(purchasedItems)
+    if (purchasedItems.length > 0) {
+      try {
+        // Call the mutation to update purchase history
+        const { data } = await updatePurchaseHistory({
+          variables: { purchasedItems } 
+        });
+  
+        console.log('Purchase history updated:', data.updatePurchaseHistory);
+        
+        // Clear the cart after a successful purchase
+        setCartItems({});
+        localStorage.setItem("cartItems", JSON.stringify({}));
+      } catch (error) {
+        console.error("Error during checkout:", error);
+      }
+    } else {
+      console.warn("No items in the cart to checkout.");
+    }
   };
 
   const contextValue: ShopContextValue = {

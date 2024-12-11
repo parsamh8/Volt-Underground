@@ -8,8 +8,8 @@ const typeDefs = `
   }
 
   type Purchase {
-    id: ID!
-    event: Event
+    eventId: Int!
+    quantity: Int!
   }
   
   type Event {
@@ -25,29 +25,15 @@ const typeDefs = `
     ticketLink: String!
   }
 
-  type Thought {
-    _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
-  }
-
-  type Comment {
-    _id: ID
-    commentText: String
-    createdAt: String
-  }
-
-  input ThoughtInput {
-    thoughtText: String!
-    thoughtAuthor: String!
-  }
-
   input UserInput {
     username: String!
     email: String!
     password: String!
+  }
+
+  input PurchaseInput {
+    eventId: Int!
+    quantity: Int!
   }
   
   type Auth {
@@ -59,18 +45,12 @@ const typeDefs = `
     events: [Event!]!
     users: [User]
     user(username: String!): User
-    thoughts: [Thought]!
-    thought(thoughtId: ID!): Thought
     me: User
   }
 
   type Mutation {
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth
-    addThought(input: ThoughtInput!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
     createEvent(
       posterUrl: String,
       title: String,
@@ -85,7 +65,7 @@ const typeDefs = `
     updateUser(
       newEmail: String
     ): User
-    updatePurchaseHistory(purchasedEventIds: [Int]): User 
+    updatePurchaseHistory(purchasedItems: [PurchaseInput!]!): User 
   }
 `;
 

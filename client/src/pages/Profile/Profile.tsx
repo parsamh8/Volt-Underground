@@ -257,7 +257,7 @@ const Profile = () => {
                 className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
               />
             </div>
-            <button className="deatils-button" onClick={handleFormSubmit}>
+            <button className="details-button" onClick={handleFormSubmit}>
               CONFIRM
             </button>
           </div>

@@ -1,16 +1,14 @@
 import db from '../config/connection.js';
-import { Thought, User, Event } from '../models/index.js';
+import { User, Event } from '../models/index.js';
 import cleanDB from './cleanDB.js';
 
 import userData from './userData.json' assert { type: 'json'};
-import thoughtData from './thoughtData.json' assert { type: 'json' };
 import eventData from './eventData.json' assert { type: 'json' };
 const seedDatabase = async (): Promise<void> => {
   try {
     await db();
     await cleanDB();
 
-    await Thought.insertMany(thoughtData);
     await User.create(userData);
     await Event.insertMany(eventData);
     console.log('Seeding completed successfully!');

@@ -6,7 +6,6 @@ import App from './App.jsx';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile/Profile.js';
 import ErrorPage from './pages/Error';
 import Cart from './pages/Cart/Cart.js';
@@ -33,9 +32,6 @@ const router = createBrowserRouter([
       }, {
         path: '/me',
         element: <Profile />
-      }, {
-        path: '/thoughts/:thoughtId',
-        element: <SingleThought />
       },{
         path: '/session/:eventId',
         element: <Session />

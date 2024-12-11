@@ -7,7 +7,6 @@ import { CartItem } from "./Cart-Item";
 import { useNavigate } from "react-router-dom";
 
 import "./cart.css";
-// import ThoughtList from '../../components/ThoughtList';
 
 import { QUERY_USER, QUERY_ME, QUERY_EVENTS } from "../../utils/queries";
 

@@ -6,7 +6,7 @@ import { ShopContext } from "../../context/Shop-Context";
 import { CartItem } from "./Cart-Item";
 import { useNavigate } from "react-router-dom";
 
-import "./cart.css";
+import "./Cart.css";
 
 import { QUERY_USER, QUERY_ME, QUERY_EVENTS } from "../../utils/queries";
 

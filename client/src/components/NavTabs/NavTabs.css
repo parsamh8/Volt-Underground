@@ -5,7 +5,7 @@
   right: 0;
   width: 300px;
   height: 100vh;
-  background-color: rgb(25, 26, 28);
+  background-color: rgb(9, 9, 10);
   transform: translateX(100%);
   transition: transform 0.3s ease;
   z-index: 1040;
@@ -61,8 +61,8 @@
 }
 
 .navbar-button-icon {
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 50px;
 }
 
 /* Overlay Styles */
@@ -114,7 +114,7 @@ nav ul {
 
 .nav-item {
   text-decoration: none;
-  padding: 15px 0 15px 5px;
+  padding: 5px 0 0px 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -127,12 +127,12 @@ nav ul {
   transition: box-shadow 0.3s ease;
   position: relative;
   left: 2vw;
-  color: white;
-  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.819);
+  font-size: 1.2rem;
 }
 
 .nav-link:hover {
-  color: white;
+  color: rgb(236, 242, 185);
   text-decoration: none;
 }
 

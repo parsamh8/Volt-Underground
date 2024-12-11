@@ -82,6 +82,9 @@ const typeDefs = `
       time: String,
       ticketLink: String
     ): Event
+    updateUser(
+      newEmail: String
+    ): User
     updatePurchaseHistory(purchasedEventIds: [Int]): User 
   }
 `;

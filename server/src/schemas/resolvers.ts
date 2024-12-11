@@ -205,13 +205,22 @@ const resolvers = {
       await newEvent.save();
       return newEvent;
     },
-<<<<<<< HEAD
+    updateUser: async (_parent: any, { newEmail }: { newEmail: string }, context: any) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $set: {
+              email: newEmail
+            }
+          },
+          { new: true }
+        );
+      }
+      throw AuthenticationError;
+    },
 
-    // updatePurchaseHistory: async(_parent: any, { userId, purchases, action }: {userId: string, purchases: Array<{purchaseId: number, quantity: number}>, action:string},
-    //   context: any) => {
-
-    //   }
-    updatePurchaseHistory: async (_parent: any, { purchasedEventIds }: { purchasedEventIds: [number] }, context: any) => {
+    updatePurchaseHistory: async (_parent: any, { purchasedEventIds }: { purchasedEventIds: [number] }, context: any): Promise<any> => {
       if (context.user) {
 
         const purchasedItems = purchasedEventIds.map(eventId => {
@@ -239,25 +248,8 @@ const resolvers = {
               foreignField: "id"
             }
           })
-
-          ;
-=======
-    updateUser: async (_parent:any, {newEmail}: {newEmail:string}, context:any ) => {
-      if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
-          {
-           $set: {
-            email: newEmail
-           }
-          },
-          { new: true }
-        );
->>>>>>> 33e298d76ed26f4f6749a1a5a6fc29f7efc4a464
+        }
       }
-      throw AuthenticationError;
     }
-  },
-};
-
-export default resolvers;
+  }
+export default resolvers

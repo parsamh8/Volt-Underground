@@ -122,6 +122,12 @@ nav ul {
   cursor: pointer;
 }
 
+#ubuntu-font {
+  font-family: "Ubuntu Condensed", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .nav-link {
   text-decoration: none;
   transition: box-shadow 0.3s ease;
@@ -132,21 +138,17 @@ nav ul {
 }
 
 .nav-link:hover {
-  color: rgb(236, 242, 185);
+  color: rgb(231, 224, 32);
   text-decoration: none;
 }
 
-.nav-item:hover {
-  box-shadow: 0 0 8px rgb(255, 255, 255); /* White glow effect */
-  filter: brightness(1.3);
-}
 
 .nav-item.active {
   font-weight: bold;
 }
 
 a:-webkit-any-link {
-  color: white;
+  color: rgb(255, 255, 255);
   cursor: pointer;
   text-decoration: none;
 }
@@ -155,6 +157,6 @@ a:-webkit-any-link {
 .nav-link:active {
   outline: none;
   text-decoration: none;
-  color: white;
+  color: rgb(171, 168, 24);
   font-weight: bold;
 }

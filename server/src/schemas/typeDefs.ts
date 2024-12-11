@@ -4,7 +4,12 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    purchaseHistory: [Purchase]!
+  }
+
+  type Purchase {
+    id: ID!
+    event: Event
   }
   
   type Event {
@@ -80,6 +85,7 @@ const typeDefs = `
     updateUser(
       newEmail: String
     ): User
+    updatePurchaseHistory(purchasedEventIds: [Int]): User 
   }
 `;
 

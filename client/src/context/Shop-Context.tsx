@@ -1,6 +1,9 @@
 import { createContext, useState, ReactNode, useEffect } from "react";
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_EVENTS } from '../utils/queries';
+import { UPDATE_PURCHASE_HISTORY } from "../utils/mutations";
+
+
 
 // Define the type for the event
 interface Event {
@@ -13,7 +16,7 @@ interface Event {
   date: string;
   time: string;
   ticketLink: string;
-}  
+}
 
 // Define the type for the cart
 type Cart = Record<number, number>;
@@ -63,6 +66,7 @@ const getDefaultCart = (events: Event[]): Cart => {
 // Context provider component
 export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   const { data: eventsData } = useQuery(QUERY_EVENTS);
+  const [updatePurchaseHistory] = useMutation(UPDATE_PURCHASE_HISTORY)
   const events = eventsData?.events || [];
 
   // Initialize cartItems state from localStorage (if available)
@@ -121,7 +125,10 @@ export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   };
 
   const checkout = () => {
-    const newCart = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0} // refine to more scalable solution so we can add many more events without updating
+    const newCart = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0 } // refine to more scalable solution so we can add many more events without updating
+    events.map((event: any) => {
+      if (cartItems[event.id] !== 0) {
+        updatePurchaseHistory(event.id) }});
     setCartItems(newCart);
     localStorage.setItem("cartItems", JSON.stringify(newCart));
     return newCart;

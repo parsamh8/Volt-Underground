@@ -1,5 +1,5 @@
 // Boiler plate code used from M18A26
-import { /*Navigate,*/ useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useContext, useState } from "react";
 import { ShopContext } from "../../context/Shop-Context";

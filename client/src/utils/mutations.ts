@@ -77,3 +77,28 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+
+export const UPDATE_PURCHASE_HISTORY = gql`
+  mutation UpdatePurchaseHistory($purchasedEventIds: [Int]) {
+  updatePurchaseHistory(purchasedEventIds: $purchasedEventIds) {
+    _id
+    username
+    purchaseHistory {
+      id
+      event {
+        id
+        title
+        description
+        posterUrl
+        price
+        address
+        date
+        venue
+        time
+        ticketLink
+      }
+    }
+  }
+}
+`

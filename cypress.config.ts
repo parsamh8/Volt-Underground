@@ -8,7 +8,6 @@ export default defineConfig({
       framework: 'react',
       bundler: 'vite',
       viteConfig,
-      
     },
     specPattern: 'Cypress/component/*.cy.{js,ts,jsx,tsx}',
   },
@@ -16,5 +15,6 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    supportFile: false,  // Disable the support file
   },
 });

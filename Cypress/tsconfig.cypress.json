@@ -1,3 +1,4 @@
+// tsconfig.cypress.json (Cypress-specific config)
 {
   "compilerOptions": {
     "target": "ES6",
@@ -6,11 +7,18 @@
     "allowJs": true,
     "esModuleInterop": true,
     "strict": true,
-    "types": ["cypress"],
+    "types": ["cypress", "@types/jest", "jest"],
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "outDir": "./dist"
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
 }

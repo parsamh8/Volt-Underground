@@ -1,19 +1,21 @@
-import { defineConfig } from "cypress";
-import viteConfig from "./vite.config";
+// cypress.config.ts
+import { defineConfig } from 'cypress';
+import viteConfig from './vite.config';
 
 export default defineConfig({
   component: {
     devServer: {
-      framework: "react",
-      bundler: "vite",
+      framework: 'react',
+      bundler: 'vite',
       viteConfig,
     },
-    specPattern: 'cypress/component/*.{js,ts,jsx,tsx}',
+    specPattern: 'cypress/component/*.cy.{js,ts,jsx,tsx}',
+    supportFile: 'cypress/support/component.ts'
   },
-
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    supportFile: 'cypress/support/e2e.ts',  // Disable the support file
   },
 });

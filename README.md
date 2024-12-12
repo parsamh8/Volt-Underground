@@ -6,10 +6,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributors](https://img.shields.io/badge/contributors-3-orange?style=plastic&logo=appveyor
-)](https://github.com/jake-magri/Hipub/graphs/contributors)
-[![Forks](https://img.shields.io/github/forks/404pandas/project-2-setup-guide.svg?style=plastic&logo=appveyor)](https://github.com/jake-magri/Hipub/forks)
-[![Stargazers](https://img.shields.io/badge/stars-1-blue?style=plastic&logo=appveyor)](https://github.com/jake-magri/Hipub/stargazers)
-[![Issues](https://img.shields.io/badge/issues-5%20open-green?style=plastic&logo=appveyor)](https://github.com/jake-magri/Hipub/issues)
+)](https://github.com/parsamh8/Volt-Underground/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/404pandas/project-2-setup-guide.svg?style=plastic&logo=appveyor)](https://github.com/parsamh8/Volt-Underground/forks)
+[![Stargazers](https://img.shields.io/badge/stars-1-blue?style=plastic&logo=appveyor)](https://github.com/parsamh8/Volt-Underground/stargazers)
+[![Issues](https://img.shields.io/badge/issues-5%20open-green?style=plastic&logo=appveyor)](https://github.com/parsamh8/Volt-Underground/issues)
 
 </div>
 
@@ -30,7 +30,7 @@
     <br />
     <br />
     <!-- TODO: add deployment link -->
-    <a href="https://github.com/parsamh8">View Demo(Coming Soon)</a>
+    <a href="https://volt-underground.onrender.com/">View Demo</a>
     ·
     <a href="https://github.com/parsamh8/Volt-Underground/issues">Report Bug</a>
     ·
@@ -64,15 +64,8 @@
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
-<!-- TODO: add your screenshots or demo videos here -->
-<!-- Add screenshots using the following format: -->
-<!-- ![Screenshot alt description](directPathOfScreenshots) -->
-<!-- Add video demos using the following format: -->
-<!-- ![Video alt description](directPathOfVideos) -->
 
 This project was built using Node.js, Express, React, MongoDB, Mongoose, and GraphQL.
 
@@ -147,11 +140,20 @@ npm run start
 
 Volt Underground is a ticket-selling platform focused on the underground DJ music scene. Once a user creates an account, they gain access to a personalized profile page, where they can track their ticket purchases and browse upcoming events. The app features several key functionalities:
 
+![alt text](client/src/assets/home-frame.PNG)
+
+
 1. **User Profiles**: Each user has their own profile page where they can view their purchase history and keep track of past events. The profile page serves as a personalized hub for users to stay connected to their favorite events and DJ performances.
+   
+![alt text](client/src/assets/profile-frame.PNG)
 
 2. **Event Browsing**: Users can easily browse a wide range of upcoming underground DJ events through the app’s intuitive interface. The events feature a location, date, and genre, making it simple to discover new shows in your area.
 
+![alt text](client/src/assets/events-frame.PNG)
+
 3. **Ticket Purchases**: The app allows users to purchase tickets for their favorite events directly through the platform. With a streamlined purchasing process, Volt Underground ensures that users can secure their tickets with ease and confidence.
+
+![alt text](client/src/assets/checkout-frame.PNG)
 
 4. **GraphQL Integration**: Volt Underground uses GraphQL for efficient data fetching, allowing the app to serve personalized content like event recommendations and ticket availability in real-time. This improves user experience by delivering only the data they need.
 
@@ -206,7 +208,7 @@ Volt Underground aims to provide a seamless experience for users to discover und
 - [ ] Expand the **Database** to support a larger user base and more event data.
 - [ ] Integrate **Push Notifications** to alert users about upcoming events and ticket availability.
 
-See the [open issues](https://github.com/jake-magri/Hipub/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/parsamh8/Volt-Underground/issues) for a full list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 

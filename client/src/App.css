@@ -379,6 +379,7 @@ h1 {
 
 h2 {
   font-size: 2rem !important;
+  margin: 0 0 0.8rem !important;
 }
 
 h3 {
@@ -1793,6 +1794,10 @@ body {
   font-weight: 500;
   font-size: x-large;
   font-style: normal;
+}
+
+.bold {
+  font-size: 400px;
 }
 
 .cta-button:active {

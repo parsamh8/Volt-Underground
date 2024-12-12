@@ -20,5 +20,5 @@
     "jsx": "react-jsx",
     "outDir": "./dist"
   },
-  "exclude": ["node_modules", "Cypress"]
+  "exclude": ["node_modules", "cypress"]
 }

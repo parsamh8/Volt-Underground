@@ -14,7 +14,7 @@
     "seed": "cd server && npm run seed",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
     "render-build": "npm install && npm run build",
-    "test-component": "cypress run"
+    "test-component": "npx cypress run --component"
   },
   "keywords": [],
   "author": "",

@@ -10,6 +10,7 @@ export default defineConfig({
       viteConfig,
     },
     specPattern: 'cypress/component/*.cy.{js,ts,jsx,tsx}',
+    supportFile: 'cypress/support/component.ts'
   },
   e2e: {
     setupNodeEvents(on, config) {

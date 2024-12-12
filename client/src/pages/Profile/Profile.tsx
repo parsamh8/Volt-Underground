@@ -189,10 +189,10 @@ const Profile = () => {
               </div>
             </div>
             <div className="text-center mt-12">
-              <h3 className="text-4xl font-semibold leading-normal mb-2 text-white">
+              <h2 id="gruppo" className="text-4xl font-semibold leading-normal mb-2 text-white">
                 {user.username}
-              </h3>
-              <h4 className="mb-4">{user.email}</h4>
+              </h2>
+              <h4 id="gruppo" className="mb-4">{user.email}</h4>
               <button className="details-button" onClick={handleOpenPopup}>
                 Update Email
               </button>
@@ -200,7 +200,7 @@ const Profile = () => {
             <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-9/12 px-4">
-                  <p className="mb-4 text-2xl leading-relaxed text-white">
+                  <p id="Play" className="mb-4 text-2xl leading-relaxed text-white">
                     PURCHASE HISTORY
                   </p>
                     <div className="card-container profile-page-card-container">
@@ -216,7 +216,7 @@ const Profile = () => {
                           />
                         ))
                       ) : (
-                        <p>No purchase history available.</p>
+                        <p id="Play">No purchase history available.</p>
                       )}
                     </div>
                   

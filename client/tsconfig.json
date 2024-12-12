@@ -27,7 +27,7 @@
   },
   "include": [
     "src"
-  ],
+, "../Cypress/component/Home.cy.tsx"  ],
 "references": [
     {
       "path": "./tsconfig.node.json"
